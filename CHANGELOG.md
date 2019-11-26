@@ -1,5 +1,9 @@
 ## Learn Rubric Arbiter
 
+## 0.0.3
+- Added some contextual and persistence code.
+- Added a first JSP page, for courses selection.
+
 # 0.0.2
 - Created some potential domain-based classes.
   - Simple course, membership, user.

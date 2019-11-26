@@ -4,11 +4,16 @@
 
 <%@ taglib prefix="bbNG" uri="/bbNG" %>
 
-<bbNG:learningSystemPage title="Learn Rubric Arbiter" authentication="Y">
+<bbNG:learningSystemPage
+    title="Learn Rubric Arbiter"
+    authentication="Y"
+    entitlement="course.control_panel.VIEW">
   <bbNG:pageHeader>
     <bbNG:pageTitleBar title="Learn Rubric Arbiter" />
   </bbNG:pageHeader>
 
-  <p>Here will be some info relating to the rubric arbiter tool.</p>
+  <bbNG:step title="Course(s) Selection">
+    <%@include file="courses_selector.jsp"%>
+  </bbNG:step>
 
 </bbNG:learningSystemPage>
