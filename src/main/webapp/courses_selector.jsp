@@ -15,38 +15,43 @@
 
 <%
   BlackboardContext context = new BlackboardContext (request);
-
   String userId = context.getContextUserId();
-  String evaluatorId = "rubric_evaluator";
 
-  SimpleCoursesRetriever retriever = new SimpleCoursesRetriever (userId, evaluatorId);
+  SimpleCoursesRetriever retriever = new SimpleCoursesRetriever (userId);
   PersistenceManager manager = new PersistenceManager();
 
   List<SimpleCourse> courses = new ArrayList<>();
-  pageContext.setAttribute ("courses", courses);
 
   try {
-    manager.obtainConnection();
+    manager.establishConnection();
 
     CourseDbLoader courseLoader = manager.getCourseDbLoader();
     CourseMembershipDbLoader membershipLoader = manager.getMembershipDbLoader();
 
-    courses = retriever.retrieveSimpleCourses (membershipLoader, courseLoader);
+    courses = retriever.retrieveSimpleCourses (
+      membershipLoader, courseLoader, "rubric_evaluator"
+    );
   } catch (Exception e) {
-    %><bbNG:error exception="<%= e %>" /><%
+    %><bbNG:error exception="<%= e %>" /><br><%
   }
+
+  pageContext.setAttribute ("courses", courses);
 %>
 
   <c:choose>
     <c:when test="${courses.isEmpty()}">
       <p>There are no courses to select from.</p>
     </c:when>
+
     <c:otherwise>
-      <c:forEach var="simpleCourse" items="courses">
-        <bbNG:checkboxElement
-           value="${simpleCourse.primaryKey}"
-           name="simple-courses"
-           optionLabel="${simpleCourse.name}"/>
+      <c:forEach var="simpleCourse" items="<%= courses %>">
+        <bbNG:dataElement>
+          <bbNG:checkboxElement
+              value="${simpleCourse.primaryKey}"
+              name="simple-courses-${simpleCourse.primaryKey}"
+              optionLabel="${simpleCourse.name}"
+              isVertical="true"/>
+        </bbNG:dataElement>
       </c:forEach>
     </c:otherwise>
   </c:choose>

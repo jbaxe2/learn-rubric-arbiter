@@ -20,14 +20,14 @@ public class SimpleMembership {
 
   private final Date enrollmentDate;
 
-  private final Date lastAccess;
+  //private final Date lastAccess;
 
   /**
    * The [SimpleMembership] field constructor...
    */
   public SimpleMembership (
     String primaryKey, String coursePk1, String userPk1, String role,
-    boolean availableInd, Date enrollmentDate, Date lastAccess
+    boolean availableInd, Date enrollmentDate//, Date lastAccess
   ) {
     this.primaryKey = primaryKey;
     this.coursePk1 = coursePk1;
@@ -35,20 +35,20 @@ public class SimpleMembership {
     this.role = role;
     this.availableInd = availableInd;
     this.enrollmentDate = enrollmentDate;
-    this.lastAccess = lastAccess;
+    //this.lastAccess = lastAccess;
   }
 
   /**
    * The [SimpleMembership] course membership constructor...
    */
-  public SimpleMembership (CourseMembership membership) {
+  SimpleMembership (CourseMembership membership) {
     this.primaryKey = membership.getId().getExternalString();
     this.coursePk1 = membership.getCourseId().getExternalString();
     this.userPk1 = membership.getUserId().getExternalString();
     this.role = membership.getRoleAsString();
     this.availableInd = membership.getIsAvailable();
     this.enrollmentDate = membership.getEnrollmentDate().getTime();
-    this.lastAccess = membership.getLastAccessDate().getTime();
+    //this.lastAccess = membership.getLastAccessDate().getTime();
   }
 
   public String getPrimaryKey() {
@@ -75,7 +75,7 @@ public class SimpleMembership {
     return enrollmentDate;
   }
 
-  public Date getLastAccess() {
+  /*public Date getLastAccess() {
     return lastAccess;
-  }
+  }*/
 }

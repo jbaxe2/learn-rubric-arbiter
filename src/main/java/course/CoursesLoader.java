@@ -9,20 +9,20 @@ import blackboard.persist.course.CourseDbLoader;
 /**
  * The [CoursesLoader] class...
  */
-public class CoursesLoader {
+class CoursesLoader {
   final private CourseDbLoader coursesLoader;
 
   /**
    * The [CoursesLoader] constructor...
    */
-  public CoursesLoader (CourseDbLoader coursesLoader) {
+  CoursesLoader (CourseDbLoader coursesLoader) {
     this.coursesLoader = coursesLoader;
   }
 
   /**
    * The [loadByCourseId] method...
    */
-  public SimpleCourse loadByCourseId (String courseId) throws PersistenceException {
+  SimpleCourse loadByCourseId (String courseId) throws PersistenceException {
     Id bbCourseId = Id.toId (Course.DATA_TYPE, courseId);
 
     return _loadCourseById (bbCourseId);
@@ -32,8 +32,6 @@ public class CoursesLoader {
    * The [_loadCourseById] method...
    */
   private SimpleCourse _loadCourseById (Id courseId) throws PersistenceException {
-    Course bbCourse = coursesLoader.loadById (courseId);
-
-    return new SimpleCourse (bbCourse);
+    return new SimpleCourse (coursesLoader.loadById (courseId));
   }
 }

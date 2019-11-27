@@ -33,11 +33,11 @@ public class SimpleCourse {
   /**
    * The [SimpleCourse] course constructor...
    */
-  public SimpleCourse (Course course) {
+  SimpleCourse (Course course) {
     this.primaryKey = course.getId().getExternalString();
     this.courseId = course.getCourseId();
     this.batchUid = course.getBatchUid();
-    this.name = course.getTitle();
+    this.name = course.getDisplayTitle();
     this.availableInd = course.getIsAvailable();
   }
 

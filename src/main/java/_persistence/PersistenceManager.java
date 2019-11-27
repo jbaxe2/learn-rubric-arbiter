@@ -30,9 +30,9 @@ public class PersistenceManager {
   public PersistenceManager() {}
 
   /**
-   * The [obtainConnection] method...
+   * The [establishConnection] method...
    */
-  public void obtainConnection() throws ConnectionNotAvailableException {
+  public void establishConnection() throws ConnectionNotAvailableException {
     bbPersistenceManager =
       PersistenceServiceFactory.getInstance().getDbPersistenceManager();
 

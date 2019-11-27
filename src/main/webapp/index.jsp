@@ -12,8 +12,24 @@
     <bbNG:pageTitleBar title="Learn Rubric Arbiter" />
   </bbNG:pageHeader>
 
-  <bbNG:step title="Course(s) Selection">
-    <%@include file="courses_selector.jsp"%>
-  </bbNG:step>
+  <bbNG:dataCollection>
+    <bbNG:step
+        title="Courses Selection"
+        instructions="Please select one or more courses for which
+            you would like to review the rubrics.">
+      <%@include file="courses_selector.jsp"%>
+    </bbNG:step>
+
+    <bbNG:step
+        title="Rubrics Selection"
+        instructions="Please select one or more rubrics from the above
+            selected courses.">
+      <p>Here will be the rubrics selection.</p>
+    </bbNG:step>
+
+    <bbNG:stepSubmit
+        title="Review Selected Rubric Information"
+        instructions="Submit to review the selected rubric information."/>
+  </bbNG:dataCollection>
 
 </bbNG:learningSystemPage>

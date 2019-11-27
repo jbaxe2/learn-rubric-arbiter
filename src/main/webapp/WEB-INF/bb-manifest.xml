@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<manifest>
+  <plugin>
+    <name value="Learn Rubric Arbiter" />
+    <handle value="learn-rubric-arbiter" />
+    <description
+        value="The Learn Rubric Arbiter is a simple tool allowing those with a
+            particular role in courses to review rubric data in those courses." />
+    <version value="0.0.4" />
+
+    <requires>
+      <bbversion value="9.1" />
+    </requires>
+
+    <vendor>
+      <id value="wsu"/>
+      <name value="Westfield State University" />
+      <url value="http://www.westfield.ma.edu/" />
+      <description value="WSU is a public state university located in Westfield, MA" />
+    </vendor>
+
+    <application-defs>
+      <application handle="learn-rubric-arbiter" type="course" use-ssl="true"
+                   name="Learn Rubric Arbiter" can-allow-guest="false"
+                   is-course-tool="true" is-sys-tool="true">
+        <description lang="en_US">
+          The Learn Rubric Arbiter tool is a simple rubric report building block.
+        </description>
+
+        <links>
+          <link>
+            <type value="course_tool" />
+            <name value="Learn Rubric Arbiter" />
+            <url value="index.jsp" />
+            <description value="Learn Rubric Arbiter is a simple rubric report tool." />
+          </link>
+
+          <link>
+            <type value="system_tool" />
+            <name value="Learn Rubric Arbiter" />
+            <url value="index.jsp" />
+            <description value="Learn Rubric Arbiter is a simple rubric report tool." />
+          </link>
+        </links>
+      </application>
+    </application-defs>
+
+    <!-- Permissions required for proper operation -->
+    <permissions>
+      <permission type="socket" name="*" actions="connect,resolve" />
+      <permission type="runtime" name="db.connection.*" />
+      <permission type="attribute" name="user.authinfo" actions="get" />
+      <permission type="attribute" name="user.personalinfo" actions="get" />
+      <permission type="attribute" name="enrollment.rowstatus" actions="get" />
+      <permission type="persist" name="user" actions="read" />
+      <permission type="persist" name="userrole" actions="read" />
+      <permission type="persist" name="coursemembership" actions="read" />
+      <permission type="persist" name="enrollment" actions="read" />
+    </permissions>
+  </plugin>
+</manifest>

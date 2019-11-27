@@ -16,23 +16,23 @@ import membership.SimpleMembership;
 public class SimpleCoursesRetriever {
   final private String userId;
 
-  final private String evaluatorId;
-
   /**
    * The [SimpleCoursesRetriever] constructor...
    */
-  public SimpleCoursesRetriever (String userId, String evaluatorId) {
+  public SimpleCoursesRetriever (String userId) {
     this.userId = userId;
-    this.evaluatorId = evaluatorId;
   }
 
   /**
    * The [retrieveSimpleCourses] method...
    */
   public List<SimpleCourse> retrieveSimpleCourses (
-    CourseMembershipDbLoader membershipsLoader, CourseDbLoader courseLoader
+    CourseMembershipDbLoader membershipsLoader, CourseDbLoader courseLoader,
+    String roleId
   ) throws PersistenceException {
-    List<SimpleMembership> memberships = _loadMemberships (membershipsLoader);
+    List<SimpleMembership> memberships =
+      _loadMemberships (membershipsLoader, roleId);
+
     List<String> courseIds = _extractRubricCourseIds (memberships);
 
     return _loadCourses (courseLoader, courseIds);
@@ -42,12 +42,11 @@ public class SimpleCoursesRetriever {
    * The [_loadMemberships] method...
    */
   private List<SimpleMembership> _loadMemberships (
-    CourseMembershipDbLoader membershipsLoader
+    CourseMembershipDbLoader membershipsLoader, String roleId
   ) throws PersistenceException {
-    MembershipsLoader loader =
-      new MembershipsLoader (membershipsLoader, evaluatorId);
+    MembershipsLoader loader = new MembershipsLoader (membershipsLoader);
 
-    return loader.loadRubricEvaluatorMemberships (userId);
+    return loader.loadRubricEvaluatorMemberships (userId, roleId);
   }
 
   /**
@@ -57,7 +56,7 @@ public class SimpleCoursesRetriever {
     List<String> courseIds = new ArrayList<>();
 
     for (SimpleMembership membership : memberships) {
-      courseIds.add (membership.getPrimaryKey());
+      courseIds.add (membership.getCoursePk1());
     }
 
     return courseIds;
