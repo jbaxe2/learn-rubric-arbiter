@@ -1,5 +1,8 @@
 ## Learn Rubric Arbiter
 
+## 0.0.5
+- Start of rubric loaders and handlers.
+
 ## 0.0.4
 - Added the Bb Manifest for describing the building block to a Learn instance.
 - Some refactoring.
