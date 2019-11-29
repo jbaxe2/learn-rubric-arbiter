@@ -27,7 +27,7 @@ public class Rubric {
   /**
    *  The [Rubric] constructor...
    */
-  Rubric (
+  public Rubric (
     String primaryKey, String coursePk, String title, String description,
     String creatorPk, RubricType type, float maxValue,
     Date created, Date modified

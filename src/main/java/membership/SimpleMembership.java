@@ -8,34 +8,31 @@ import blackboard.data.course.CourseMembership;
  * The [SimpleMembership] class...
  */
 public class SimpleMembership {
-  private final String primaryKey;
+  final private String primaryKey;
 
-  private final String coursePk1;
+  final private String coursePk;
 
-  private final String userPk1;
+  final private String userPk;
 
-  private final String role;
+  final private String role;
 
-  private final boolean availableInd;
+  final private boolean availableInd;
 
-  private final Date enrollmentDate;
-
-  //private final Date lastAccess;
+  final private Date enrollmentDate;
 
   /**
    * The [SimpleMembership] field constructor...
    */
   public SimpleMembership (
-    String primaryKey, String coursePk1, String userPk1, String role,
+    String primaryKey, String coursePk, String userPk, String role,
     boolean availableInd, Date enrollmentDate//, Date lastAccess
   ) {
     this.primaryKey = primaryKey;
-    this.coursePk1 = coursePk1;
-    this.userPk1 = userPk1;
+    this.coursePk = coursePk;
+    this.userPk = userPk;
     this.role = role;
     this.availableInd = availableInd;
     this.enrollmentDate = enrollmentDate;
-    //this.lastAccess = lastAccess;
   }
 
   /**
@@ -43,24 +40,23 @@ public class SimpleMembership {
    */
   SimpleMembership (CourseMembership membership) {
     this.primaryKey = membership.getId().getExternalString();
-    this.coursePk1 = membership.getCourseId().getExternalString();
-    this.userPk1 = membership.getUserId().getExternalString();
+    this.coursePk = membership.getCourseId().getExternalString();
+    this.userPk = membership.getUserId().getExternalString();
     this.role = membership.getRoleAsString();
     this.availableInd = membership.getIsAvailable();
     this.enrollmentDate = membership.getEnrollmentDate().getTime();
-    //this.lastAccess = membership.getLastAccessDate().getTime();
   }
 
   public String getPrimaryKey() {
     return primaryKey;
   }
 
-  public String getCoursePk1() {
-    return coursePk1;
+  public String getCoursePk() {
+    return coursePk;
   }
 
-  public String getUserPk1() {
-    return userPk1;
+  public String getUserPk() {
+    return userPk;
   }
 
   public String getRole() {
@@ -74,8 +70,4 @@ public class SimpleMembership {
   public Date getEnrollmentDate() {
     return enrollmentDate;
   }
-
-  /*public Date getLastAccess() {
-    return lastAccess;
-  }*/
 }

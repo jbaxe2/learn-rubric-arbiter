@@ -24,15 +24,32 @@ public class PersistenceManager {
 
   private Connection connection;
 
+  private static PersistenceManager _instance;
+
   /**
    * The [PersistenceManager] constructor...
    */
-  public PersistenceManager() {}
+  public static PersistenceManager getInstance() {
+    if (null == _instance) {
+      _instance = new PersistenceManager();
+    }
+
+    return _instance;
+  }
+
+  /**
+   * The [PersistenceManager] private constructor...
+   */
+  private PersistenceManager() {}
 
   /**
    * The [establishConnection] method...
    */
   public void establishConnection() throws ConnectionNotAvailableException {
+    if (null != connection) {
+      return;
+    }
+
     bbPersistenceManager =
       PersistenceServiceFactory.getInstance().getDbPersistenceManager();
 
@@ -68,6 +85,8 @@ public class PersistenceManager {
    * The [releaseConnection] method...
    */
   public void releaseConnection() {
-    connectionManager.releaseConnection (connection);
+    if (null != connection) {
+      connectionManager.releaseConnection (connection);
+    }
   }
 }

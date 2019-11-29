@@ -18,7 +18,7 @@
   String userId = context.getContextUserId();
 
   SimpleCoursesRetriever retriever = new SimpleCoursesRetriever (userId);
-  PersistenceManager manager = new PersistenceManager();
+  PersistenceManager manager = PersistenceManager.getInstance();
 
   List<SimpleCourse> courses = new ArrayList<>();
 
@@ -55,7 +55,5 @@
       </c:forEach>
     </c:otherwise>
   </c:choose>
-
-<% manager.releaseConnection(); %>
 
 </bbNG:includedPage>

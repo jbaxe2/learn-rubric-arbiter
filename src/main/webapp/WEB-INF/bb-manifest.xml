@@ -7,7 +7,7 @@
     <description
         value="The Learn Rubric Arbiter is a simple tool allowing those with a
             particular role in courses to review rubric data in those courses." />
-    <version value="0.0.5" />
+    <version value="0.0.6" />
 
     <requires>
       <bbversion value="9.1" />
@@ -21,9 +21,10 @@
     </vendor>
 
     <application-defs>
-      <application handle="learn-rubric-arbiter" type="course" use-ssl="true"
-                   name="Learn Rubric Arbiter" can-allow-guest="false"
-                   is-course-tool="true" is-sys-tool="true">
+      <application
+          handle="learn-rubric-arbiter" type="course" use-ssl="true"
+          name="Learn Rubric Arbiter" can-allow-guest="false"
+          is-course-tool="true" is-sys-tool="true">
         <description lang="en_US">
           The Learn Rubric Arbiter tool is a simple rubric report building block.
         </description>

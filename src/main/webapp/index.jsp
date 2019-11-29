@@ -17,7 +17,7 @@
         title="Courses Selection"
         instructions="Please select one or more courses for which
             you would like to review the rubrics.">
-      <%@include file="courses_selector.jsp"%>
+      <%@ include file="courses_selector.jsp "%>
     </bbNG:step>
 
     <bbNG:step
@@ -31,5 +31,7 @@
         title="Review Selected Rubric Information"
         instructions="Submit to review the selected rubric information."/>
   </bbNG:dataCollection>
+
+  <% PersistenceManager.getInstance().releaseConnection(); %>
 
 </bbNG:learningSystemPage>

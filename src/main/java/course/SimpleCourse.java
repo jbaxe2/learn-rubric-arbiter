@@ -6,15 +6,15 @@ import blackboard.data.course.Course;
  * The [SimpleCourse] class...
  */
 public class SimpleCourse {
-  private final String primaryKey;
+  final private String primaryKey;
 
-  private final String courseId;
+  final private String courseId;
 
-  private final String batchUid;
+  final private String batchUid;
 
-  private final String name;
+  final private String name;
 
-  private final boolean availableInd;
+  final private boolean availableInd;
 
   /**
    * The [SimpleCourse] field constructor...

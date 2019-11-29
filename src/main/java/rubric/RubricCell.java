@@ -27,7 +27,7 @@ public class RubricCell {
   /**
    * The [RubricCell] constructor...
    */
-  RubricCell (
+  public RubricCell (
     String primaryKey, String rowPk, String columnPk, String description,
     float numericPoints, float startPointRange, float endPointRange,
     float percentage, float percentageMin, float percentageMax

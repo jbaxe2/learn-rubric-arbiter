@@ -6,23 +6,23 @@ import blackboard.data.user.User;
  * The [SimpleUser] class...
  */
 public class SimpleUser {
-  private final String primaryKey;
+  final private String primaryKey;
 
-  private final String userId;
+  final private String userId;
 
-  private final String batchUid;
+  final private String batchUid;
 
-  private final String studentId;
+  final private String studentId;
 
-  private final String systemRole;
+  final private String systemRole;
 
-  private final String firstName;
+  final private String firstName;
 
-  private final String lastName;
+  final private String lastName;
 
-  private final String email;
+  final private String email;
 
-  private final boolean availableInd;
+  final private boolean availableInd;
 
   /**
    * The [SimpleUser] field constructor...

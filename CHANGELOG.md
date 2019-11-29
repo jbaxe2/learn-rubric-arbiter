@@ -1,5 +1,9 @@
 ## Learn Rubric Arbiter
 
+## 0.0.6
+- Minor refactoring.
+- More work on rubric querying.
+
 ## 0.0.5
 - Start of rubric loaders and handlers.
 

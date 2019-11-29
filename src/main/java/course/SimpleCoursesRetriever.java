@@ -56,7 +56,7 @@ public class SimpleCoursesRetriever {
     List<String> courseIds = new ArrayList<>();
 
     for (SimpleMembership membership : memberships) {
-      courseIds.add (membership.getCoursePk1());
+      courseIds.add (membership.getCoursePk());
     }
 
     return courseIds;
