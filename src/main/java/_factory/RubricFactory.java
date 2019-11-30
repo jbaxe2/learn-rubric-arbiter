@@ -10,9 +10,9 @@ import rubric.Rubric;
 import rubric.RubricType;
 
 /**
- * The [AspectedRubricFactory] class...
+ * The [RubricFactory] class...
  */
-public class AspectedRubricFactory implements ResultSettingFactory<Rubric> {
+public class RubricFactory implements ResultSettingFactory<Rubric> {
   /**
    * The [create] method...
    */

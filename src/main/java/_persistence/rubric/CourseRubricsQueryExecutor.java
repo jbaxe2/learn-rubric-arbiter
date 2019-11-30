@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import _error.ImproperRubricInfo;
-import _factory.AspectedRubricFactory;
+import _factory.RubricFactory;
 import _persistence.query.QueryExecutor;
 
 import rubric.Rubric;
@@ -19,7 +19,7 @@ public class CourseRubricsQueryExecutor
     extends RubricQueryExecutor implements QueryExecutor<Rubric> {
   private List<Rubric> rubrics;
 
-  private AspectedRubricFactory rubricFactory;
+  private RubricFactory rubricFactory;
 
   /**
    * The [CourseRubricsQueryExecutor] constructor...
@@ -28,7 +28,7 @@ public class CourseRubricsQueryExecutor
     super (statement);
 
     rubrics = new ArrayList<>();
-    rubricFactory = new AspectedRubricFactory();
+    rubricFactory = new RubricFactory();
   }
 
   /**
@@ -36,25 +36,23 @@ public class CourseRubricsQueryExecutor
    */
   public List<Rubric> retrieveCourseRubrics() throws ImproperRubricInfo {
     try {
-      rubrics = rubricFactory.createAll (statement.executeQuery());
+      return rubrics = rubricFactory.createAll (statement.executeQuery());
     } catch (SQLException e) {
       throw new ImproperRubricInfo (e.getMessage());
     }
-
-    return rubrics;
   }
 
   /**
-   * The [getLastResult] method...
+   * The [getLatestResult] method...
    */
-  public Rubric getLastResult() {
+  public Rubric getLatestResult() {
     return rubrics.get (0);
   }
 
   /**
-   * The [getLastGroupedResults] method...
+   * The [getLatestGroupedResults] method...
    */
-  public List<Rubric> getLastGroupedResults() {
+  public List<Rubric> getLatestGroupedResult() {
     return rubrics;
   }
 }

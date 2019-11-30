@@ -7,12 +7,12 @@ import java.util.List;
  */
 public interface QueryExecutor<T> {
   /**
-   * The [getLastResult] method...
+   * The [getLatestResult] method...
    */
-  T getLastResult();
+  T getLatestResult();
 
   /**
-   * The [getLastGroupedResults] method...
+   * The [getLatestGroupedResult] method...
    */
-  List<T> getLastGroupedResults();
+  List<T> getLatestGroupedResult();
 }

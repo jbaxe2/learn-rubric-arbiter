@@ -17,8 +17,6 @@ import java.util.List;
 public class RubricLoader {
   private RubricQueryBuilder queryBuilder;
 
-  private RubricQueryExecutor rubricExecutor;
-
   /**
    * The [RubricLoader] constructor...
    */
@@ -29,7 +27,7 @@ public class RubricLoader {
   /**
    * The [loadRubricById] method...
    */
-  Rubric loadRubricById (String rubricPk) {
+  Rubric loadRubricById (String rubricId) {
     return new Rubric (
       "", "", "", "", "",
       RubricType.N, (float) 0.0, new Date(), new Date()
@@ -40,14 +38,16 @@ public class RubricLoader {
    * The [loadRubricsByCourseId] method...
    */
   List<Rubric> loadRubricsByCourseId (String courseId) throws ImproperRubricInfo {
+    CourseRubricsQueryExecutor rubricExecutor;
+
     try {
       rubricExecutor = new CourseRubricsQueryExecutor (
-        queryBuilder.buildRetrieveRubricsByCourseIdQuery(courseId)
+        queryBuilder.buildRetrieveRubricsByCourseIdQuery (courseId)
       );
     } catch (SQLException e) {
       throw new ImproperRubricInfo (e.getMessage());
     }
 
-    return ((CourseRubricsQueryExecutor)rubricExecutor).retrieveCourseRubrics();
+    return rubricExecutor.retrieveCourseRubrics();
   }
 }
