@@ -4,14 +4,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import rubric.Rubric;
 import rubric.RubricType;
 
 /**
- * The [RubricFactory] class...
+ * The [AspectedRubricFactory] class...
  */
-public class RubricFactory implements ResultSettingFactory<Rubric> {
+public class AspectedRubricFactory implements ResultSettingFactory<Rubric> {
   /**
    * The [create] method...
    */
@@ -32,8 +33,14 @@ public class RubricFactory implements ResultSettingFactory<Rubric> {
   /**
    * The [createAll] method...
    */
-  public Iterable<Rubric> createAll (ResultSet rawResults) {
-    return new ArrayList<>();
+  public List<Rubric> createAll (ResultSet rawResults) throws SQLException {
+    List<Rubric> rubrics = new ArrayList<>();
+
+    while (rawResults.next()) {
+      rubrics.add (create (rawResults));
+    }
+
+    return rubrics;
   }
 
   /**

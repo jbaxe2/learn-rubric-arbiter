@@ -1,11 +1,13 @@
 package _persistence.rubric;
 
+import _error.ImproperRubricInfo;
+
 import rubric.Rubric;
 import rubric.RubricType;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +16,8 @@ import java.util.List;
  */
 public class RubricLoader {
   private RubricQueryBuilder queryBuilder;
+
+  private RubricQueryExecutor rubricExecutor;
 
   /**
    * The [RubricLoader] constructor...
@@ -35,7 +39,15 @@ public class RubricLoader {
   /**
    * The [loadRubricsByCourseId] method...
    */
-  List<Rubric> loadRubricsByCourseId (String courseId) {
-    return new ArrayList<>();
+  List<Rubric> loadRubricsByCourseId (String courseId) throws ImproperRubricInfo {
+    try {
+      rubricExecutor = new CourseRubricsQueryExecutor (
+        queryBuilder.buildRetrieveRubricsByCourseIdQuery(courseId)
+      );
+    } catch (SQLException e) {
+      throw new ImproperRubricInfo (e.getMessage());
+    }
+
+    return ((CourseRubricsQueryExecutor)rubricExecutor).retrieveCourseRubrics();
   }
 }
