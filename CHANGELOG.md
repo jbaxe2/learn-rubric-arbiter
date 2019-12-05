@@ -1,5 +1,8 @@
 ## Learn Rubric Arbiter
 
+## 0.0.7
+- Minor refactoring.
+
 ## 0.0.6
 - Minor refactoring.
 - More work on rubric querying.

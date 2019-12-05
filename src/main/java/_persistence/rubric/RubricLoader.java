@@ -38,16 +38,16 @@ public class RubricLoader {
    * The [loadRubricsByCourseId] method...
    */
   List<Rubric> loadRubricsByCourseId (String courseId) throws ImproperRubricInfo {
-    CourseRubricsQueryExecutor rubricExecutor;
+    RubricQueryExecutor rubricExecutor;
 
     try {
-      rubricExecutor = new CourseRubricsQueryExecutor (
+      rubricExecutor = new RubricQueryExecutor(
         queryBuilder.buildRetrieveRubricsByCourseIdQuery (courseId)
       );
     } catch (SQLException e) {
       throw new ImproperRubricInfo (e.getMessage());
     }
 
-    return rubricExecutor.retrieveCourseRubrics();
+    return rubricExecutor.retrieveRubrics();
   }
 }
