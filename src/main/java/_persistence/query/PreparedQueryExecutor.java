@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 /**
  * The [PreparedQueryExecutor] abstract class...
  */
-public abstract class PreparedQueryExecutor {
+public abstract class PreparedQueryExecutor implements QueryExecutor {
   final protected PreparedStatement statement;
 
   /**

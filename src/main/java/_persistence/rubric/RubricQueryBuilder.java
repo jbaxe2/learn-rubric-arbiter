@@ -1,15 +1,15 @@
 package _persistence.rubric;
 
-import _persistence.query.PreparedQueryBuilder;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import _persistence.query.PreparedQueryBuilder;
+
 /**
  * The [RubricQueryBuilder] class...
  */
-public class RubricQueryBuilder extends PreparedQueryBuilder {
+class RubricQueryBuilder extends PreparedQueryBuilder {
   /**
    * The [RubricQueryBuilder] constructor...
    */

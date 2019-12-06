@@ -1,5 +1,10 @@
 ## Learn Rubric Arbiter
 
+## 0.0.8
+- Made rubric query builder and executor package private.
+- Added ability to load a single rubric by its ID.
+- Minor refactoring.
+
 ## 0.0.7
 - Minor refactoring.
 

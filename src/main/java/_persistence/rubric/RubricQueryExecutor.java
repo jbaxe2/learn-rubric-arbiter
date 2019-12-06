@@ -8,8 +8,6 @@ import java.util.List;
 
 import _error.ImproperRubricInfo;
 import _factory.RubricFactory;
-
-import _persistence.query.QueryExecutor;
 import _persistence.query.PreparedQueryExecutor;
 
 import rubric.Rubric;
@@ -17,8 +15,7 @@ import rubric.Rubric;
 /**
  * The [RubricsQueryExecutor] class...
  */
-public class RubricQueryExecutor
-    extends PreparedQueryExecutor implements QueryExecutor {
+class RubricQueryExecutor extends PreparedQueryExecutor {
   private List<Rubric> rubrics;
 
   private RubricFactory rubricFactory;
@@ -36,12 +33,30 @@ public class RubricQueryExecutor
   /**
    * The [retrieveRubrics] method...
    */
-  public List<Rubric> retrieveRubrics() throws ImproperRubricInfo {
+  public List<Rubric> retrieveRubricsForCourse() throws ImproperRubricInfo {
     try {
       return rubrics = rubricFactory.createAll (statement.executeQuery());
     } catch (SQLException e) {
       throw new ImproperRubricInfo (e.getMessage());
     }
+  }
+
+  /**
+   * The [retrieveRubric] method...
+   */
+  public Rubric retrieveRubric() throws ImproperRubricInfo {
+    Rubric rubric;
+
+    try {
+      rubric = rubricFactory.create (statement.executeQuery());
+    } catch (SQLException e) {
+      throw new ImproperRubricInfo (e.getMessage());
+    }
+
+    rubrics = new ArrayList<>();
+    rubrics.add (rubric);
+
+    return rubric;
   }
 
   /**
