@@ -58,6 +58,13 @@ public class PersistenceManager {
   }
 
   /**
+   * The [getConnection] method...
+   */
+  public Connection getConnection() {
+    return connection;
+  }
+
+  /**
    * The [getCourseDbLoader] method...
    */
   public CourseDbLoader getCourseDbLoader() throws PersistenceException {

@@ -15,14 +15,15 @@ public class RubricsLoader {
   /**
    * The [RubricsLoader] constructor...
    */
-  RubricsLoader (Connection connection) {
+  public RubricsLoader (Connection connection) {
     queryBuilder = new RubricQueryBuilder (connection);
   }
 
   /**
    * The [loadRubricsByCourseId] method...
    */
-  List<Rubric> loadRubricsByCourseId (String courseId) throws ImproperRubricInfo {
+  public List<Rubric> loadRubricsByCourseId (String courseId)
+      throws ImproperRubricInfo {
     RubricQueryExecutor rubricExecutor;
 
     try {
@@ -39,7 +40,7 @@ public class RubricsLoader {
   /**
    * The [loadRubricById] method...
    */
-  Rubric loadRubricById (String rubricId) throws ImproperRubricInfo {
+  public Rubric loadRubricById (String rubricId) throws ImproperRubricInfo {
     RubricQueryExecutor rubricExecutor;
 
     try {

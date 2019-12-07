@@ -1,5 +1,8 @@
 ## Learn Rubric Arbiter
 
+## 0.0.9
+- Start of creating the rubrics selector.
+
 ## 0.0.8
 - Made rubric query builder and executor package private.
 - Added ability to load a single rubric by its ID.

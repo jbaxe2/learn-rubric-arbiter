@@ -13,14 +13,14 @@ class RubricQueryBuilder extends PreparedQueryBuilder {
   /**
    * The [RubricQueryBuilder] constructor...
    */
-  public RubricQueryBuilder (Connection connection) {
+  RubricQueryBuilder (Connection connection) {
     super (connection);
   }
 
   /**
    * The [buildRetrieveRubricsByCourseIdQuery] method...
    */
-  public PreparedStatement buildRetrieveRubricsByCourseIdQuery (
+  PreparedStatement buildRetrieveRubricsByCourseIdQuery (
     String courseId
   ) throws SQLException {
     String query = "SELECT * FROM rubric WHERE course_pk1 = ?";
@@ -34,7 +34,7 @@ class RubricQueryBuilder extends PreparedQueryBuilder {
   /**
    * The [buildRetrieveRubricByIdQuery] method...
    */
-  public PreparedStatement buildRetrieveRubricByIdQuery (
+  PreparedStatement buildRetrieveRubricByIdQuery (
     String rubricId
   ) throws SQLException {
     String query = "SELECT * FROM rubric WHERE pk1 = ?";
@@ -48,7 +48,7 @@ class RubricQueryBuilder extends PreparedQueryBuilder {
   /**
    * The [buildRetrieveColumnsByRubricIdQuery] method...
    */
-  public PreparedStatement buildRetrieveColumnsByRubricIdQuery (
+  PreparedStatement buildRetrieveColumnsByRubricIdQuery (
     String rubricId
   ) throws SQLException {
     String query =

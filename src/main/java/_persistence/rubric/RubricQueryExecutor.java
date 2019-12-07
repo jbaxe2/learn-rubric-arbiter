@@ -33,7 +33,7 @@ class RubricQueryExecutor extends PreparedQueryExecutor {
   /**
    * The [retrieveRubrics] method...
    */
-  public List<Rubric> retrieveRubricsForCourse() throws ImproperRubricInfo {
+  List<Rubric> retrieveRubricsForCourse() throws ImproperRubricInfo {
     try {
       return rubrics = rubricFactory.createAll (statement.executeQuery());
     } catch (SQLException e) {
@@ -44,7 +44,7 @@ class RubricQueryExecutor extends PreparedQueryExecutor {
   /**
    * The [retrieveRubric] method...
    */
-  public Rubric retrieveRubric() throws ImproperRubricInfo {
+  Rubric retrieveRubric() throws ImproperRubricInfo {
     Rubric rubric;
 
     try {
@@ -62,7 +62,7 @@ class RubricQueryExecutor extends PreparedQueryExecutor {
   /**
    * The [getRubrics] method...
    */
-  public List<Rubric> getRubrics() {
+  List<Rubric> getRubrics() {
     return rubrics;
   }
 }

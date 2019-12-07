@@ -43,11 +43,11 @@ public class Rubric {
     this.modified = modified;
   }
 
-  String getPrimaryKey() {
+  public String getPrimaryKey() {
     return primaryKey;
   }
 
-  String getCoursePk() {
+  public String getCoursePk() {
     return coursePk;
   }
 

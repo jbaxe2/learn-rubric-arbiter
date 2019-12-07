@@ -24,7 +24,7 @@
         title="Rubrics Selection"
         instructions="Please select one or more rubrics from the above
             selected courses.">
-      <p>Here will be the rubrics selection.</p>
+      <%@ include file="rubrics_selector.jsp" %>
     </bbNG:step>
 
     <bbNG:stepSubmit
