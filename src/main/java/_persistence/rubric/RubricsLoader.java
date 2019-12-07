@@ -45,7 +45,7 @@ public class RubricsLoader {
 
     try {
       rubricExecutor = new RubricQueryExecutor (
-          queryBuilder.buildRetrieveRubricByIdQuery (rubricId)
+        queryBuilder.buildRetrieveRubricByIdQuery (rubricId)
       );
     } catch (Exception e) {
       throw new ImproperRubricInfo (e.getMessage());
