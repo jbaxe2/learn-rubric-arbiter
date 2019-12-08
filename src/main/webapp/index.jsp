@@ -29,7 +29,7 @@
 
     <bbNG:stepSubmit
         title="Review Selected Rubric Information"
-        instructions="Submit to review the selected rubric information."/>
+        instructions="Submit to review the selected rubric information." />
   </bbNG:dataCollection>
 
   <% PersistenceManager.getInstance().releaseConnection(); %>

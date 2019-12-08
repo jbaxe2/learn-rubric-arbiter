@@ -50,7 +50,7 @@
               value="${simpleCourse.primaryKey}"
               name="simple-courses-${simpleCourse.primaryKey}"
               optionLabel="${simpleCourse.name}"
-              isVertical="true"/>
+              isVertical="true" />
         </bbNG:dataElement>
       </c:forEach>
     </c:otherwise>
