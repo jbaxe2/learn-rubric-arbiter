@@ -52,7 +52,9 @@ public class SimpleCoursesRetriever {
   /**
    * The [_extractRubricCourseIds] method...
    */
-  private List<String> _extractRubricCourseIds (List<SimpleMembership> memberships) {
+  private List<String> _extractRubricCourseIds (
+    List<SimpleMembership> memberships
+  ) {
     List<String> courseIds = new ArrayList<>();
 
     for (SimpleMembership membership : memberships) {
@@ -65,8 +67,9 @@ public class SimpleCoursesRetriever {
   /**
    * The [_loadCourses] method...
    */
-  private List<SimpleCourse> _loadCourses (CourseDbLoader courseLoader, List<String> courseIds)
-      throws PersistenceException {
+  private List<SimpleCourse> _loadCourses (
+    CourseDbLoader courseLoader, List<String> courseIds
+  ) throws PersistenceException {
     List<SimpleCourse> courses = new ArrayList<>();
     CoursesLoader loader = new CoursesLoader (courseLoader);
 

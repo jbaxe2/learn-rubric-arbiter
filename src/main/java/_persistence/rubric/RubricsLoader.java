@@ -1,9 +1,11 @@
 package _persistence.rubric;
 
 import java.sql.Connection;
-import java.util.List;
+import java.util.*;
 
 import _error.ImproperRubricInfo;
+
+import course.SimpleCourse;
 import rubric.Rubric;
 
 /**
@@ -17,6 +19,21 @@ public class RubricsLoader {
    */
   public RubricsLoader (Connection connection) {
     queryBuilder = new RubricQueryBuilder (connection);
+  }
+
+  /**
+   * The [loadRubricsForCourses] method...
+   */
+  public Map<SimpleCourse, List<Rubric>> loadRubricsForCourses (
+    List<SimpleCourse> courses
+  ) throws ImproperRubricInfo {
+    Map<SimpleCourse, List<Rubric>> courseRubrics = new HashMap<>();
+
+    for (SimpleCourse course : courses) {
+      courseRubrics.put (course, loadRubricsByCourseId (course.getPrimaryKey()));
+    }
+
+    return courseRubrics;
   }
 
   /**

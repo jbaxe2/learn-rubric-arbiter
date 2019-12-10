@@ -1,5 +1,8 @@
 ## Learn Rubric Arbiter
 
+## 0.0.10
+- Work on course rubrics selector.
+
 ## 0.0.9
 - Start of creating the rubrics selector.
 

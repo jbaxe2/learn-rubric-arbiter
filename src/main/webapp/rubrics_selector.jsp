@@ -1,7 +1,5 @@
 <%@ page import="
-  java.util.ArrayList,
-  java.util.List,
-  _context.BlackboardContext,
+  java.util.*,
   _persistence.PersistenceManager,
   _persistence.rubric.RubricsLoader,
   rubric.Rubric" %>
@@ -12,36 +10,40 @@
 <bbNG:includedPage authentication="Y" entitlement="course.control_panel.VIEW">
 
 <%
-  BlackboardContext context = new BlackboardContext (request);
   PersistenceManager manager = PersistenceManager.getInstance();
-  List<Rubric> rubrics = new ArrayList<>();
+  Map<SimpleCourse, List<Rubric>> coursesRubrics = new HashMap<>();
 
   try {
     manager.establishConnection();
+
     RubricsLoader rubricsLoader = new RubricsLoader (manager.getConnection());
 
-    rubrics = rubricsLoader.loadRubricsByCourseId (context.getContextCourseId());
+    coursesRubrics = rubricsLoader.loadRubricsForCourses (
+      (List<SimpleCourse>)pageContext.getAttribute ("courses")
+    );
   } catch (Exception e) {
     %><bbNG:error exception="<%= e %>" /><br><%
   }
 
-  pageContext.setAttribute ("rubrics", rubrics);
+  pageContext.setAttribute ("coursesRubrics", coursesRubrics);
 %>
 
   <c:choose>
-    <c:when test="${rubrics.isEmpty()}">
-      <p>There are no rubrics to select from.</p>
+    <c:when test="${coursesRubrics.isEmpty()}">
+      <p>There are no courses rubrics to select from.</p>
     </c:when>
 
     <c:otherwise>
-      <c:forEach var="rubric" items="<%= rubrics %>">
-        <bbNG:dataElement>
-          <bbNG:checkboxElement
-             value="${rubric.primaryKey}"
-             name="rubrics-${rubric.primaryKey}"
-             optionLabel="${rubric.title}"
-             isVertical="true" />
-        </bbNG:dataElement>
+      <c:forEach var="courseRubrics" items="${coursesRubrics.values()}">
+        <c:forEach var="courseRubric" items="${courseRubrics}">
+          <bbNG:dataElement>
+            <bbNG:checkboxElement
+               value="course-rubrics-${courseRubric.primaryKey}"
+               name="course-rubrics"
+               optionLabel="${courseRubric.title}"
+               isVertical="true" />
+          </bbNG:dataElement>
+        </c:forEach>
       </c:forEach>
     </c:otherwise>
   </c:choose>

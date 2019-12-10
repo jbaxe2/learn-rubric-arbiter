@@ -14,14 +14,18 @@
 
   <bbNG:dataCollection>
     <bbNG:step
+        id="courses-selection-step"
         title="Courses Selection"
+        enableExpandCollapse="true"
         instructions="Please select one or more courses for which
             you would like to review the rubrics.">
-      <%@ include file="courses_selector.jsp "%>
+      <%@ include file="courses_selector.jsp" %>
     </bbNG:step>
 
     <bbNG:step
+        id="rubrics-selection-step"
         title="Rubrics Selection"
+        enableExpandCollapse="true"
         instructions="Please select one or more rubrics from the above
             selected courses.">
       <%@ include file="rubrics_selector.jsp" %>
@@ -31,7 +35,6 @@
         title="Review Selected Rubric Information"
         instructions="Submit to review the selected rubric information." />
   </bbNG:dataCollection>
-
-  <% PersistenceManager.getInstance().releaseConnection(); %>
-
 </bbNG:learningSystemPage>
+
+<% PersistenceManager.getInstance().releaseConnection(); %>
