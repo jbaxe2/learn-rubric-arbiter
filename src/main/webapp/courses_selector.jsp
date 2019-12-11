@@ -1,12 +1,7 @@
 <%@ page import="
-  java.util.ArrayList,
   java.util.List,
-  blackboard.persist.course.CourseDbLoader,
-  blackboard.persist.course.CourseMembershipDbLoader,
-  _context.BlackboardContext,
-  _persistence.PersistenceManager,
-  course.SimpleCourse,
-  course.SimpleCoursesRetriever" %>
+  _action.CoursesSelectorAction,
+  course.SimpleCourse" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bbNG" uri="/bbNG" %>
@@ -14,26 +9,16 @@
 <bbNG:includedPage authentication="Y" entitlement="course.control_panel.VIEW">
 
 <%
-  BlackboardContext context = new BlackboardContext (request);
-  String userId = context.getContextUserId();
-
-  SimpleCoursesRetriever retriever = new SimpleCoursesRetriever (userId);
-  PersistenceManager manager = PersistenceManager.getInstance();
-
-  List<SimpleCourse> courses = new ArrayList<>();
+  CoursesSelectorAction coursesSelector =
+    new CoursesSelectorAction (request, "rubric_evaluator");
 
   try {
-    manager.establishConnection();
-
-    CourseDbLoader courseLoader = manager.getCourseDbLoader();
-    CourseMembershipDbLoader membershipLoader = manager.getMembershipDbLoader();
-
-    courses = retriever.retrieveSimpleCourses (
-      membershipLoader, courseLoader, "rubric_evaluator"
-    );
+    coursesSelector.perform();
   } catch (Exception e) {
     %><bbNG:error exception="<%= e %>" /><br><%
   }
+
+  List<SimpleCourse> courses = coursesSelector.getCourses();
 
   pageContext.setAttribute ("courses", courses);
 %>
@@ -44,15 +29,36 @@
     </c:when>
 
     <c:otherwise>
-      <c:forEach var="simpleCourse" items="<%= courses %>">
-        <bbNG:dataElement>
-          <bbNG:checkboxElement
-              value="${simpleCourse.primaryKey}"
-              name="simple-courses-${simpleCourse.primaryKey}"
-              optionLabel="${simpleCourse.name}"
-              isVertical="true" />
-        </bbNG:dataElement>
-      </c:forEach>
+      <bbNG:dataCollection>
+        <bbNG:step
+           id="courses-selection-step"
+           title="Courses Selection"
+           enableExpandCollapse="true"
+           instructions="Please select one or more courses for which
+               you would like to review rubric information.">
+
+          <c:forEach var="simpleCourse" items="<%= courses %>">
+            <bbNG:dataElement>
+              <bbNG:checkboxElement
+                 value="${simpleCourse.primaryKey}"
+                 name="simple-courses"
+                 optionLabel="${simpleCourse.name}"
+                 isVertical="true" />
+            </bbNG:dataElement>
+          </c:forEach><br>
+        </bbNG:step>
+
+        <bbNG:stepSubmit
+            title="Select Rubrics for Courses"
+            instructions="Submit to select rubrics from the above
+                selected courses."
+            cancelUrl="?select=courses">
+
+          <bbNG:stepSubmitButton
+              label="Select Rubrics for Courses"
+              url="?select=rubrics" />
+        </bbNG:stepSubmit>
+      </bbNG:dataCollection>
     </c:otherwise>
   </c:choose>
 

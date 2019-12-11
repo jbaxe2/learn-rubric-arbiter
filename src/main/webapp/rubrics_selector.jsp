@@ -1,8 +1,10 @@
 <%@ page import="
-  java.util.*,
-  _persistence.PersistenceManager,
-  _persistence.rubric.RubricsLoader,
-  rubric.Rubric" %>
+    java.util.HashMap,
+    java.util.List,
+    java.util.Map,
+    _action.CoursesSelectorAction,
+    _action.RubricsSelectorAction,
+    rubric.Rubric" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bbNG" uri="/bbNG" %>
@@ -10,42 +12,68 @@
 <bbNG:includedPage authentication="Y" entitlement="course.control_panel.VIEW">
 
 <%
-  PersistenceManager manager = PersistenceManager.getInstance();
+  String[] selectedCourses = request.getParameterValues ("simple-courses");
+
+  List<SimpleCourse> courses;
   Map<SimpleCourse, List<Rubric>> coursesRubrics = new HashMap<>();
 
-  try {
-    manager.establishConnection();
+  if (0 == selectedCourses.length) {
+    %><p>No courses were selected to review rubrics for.</p><%
+  } else {
+    CoursesSelectorAction coursesSelector;
+    RubricsSelectorAction rubricsSelector;
 
-    RubricsLoader rubricsLoader = new RubricsLoader (manager.getConnection());
+    try {
+      coursesSelector = new CoursesSelectorAction (request, "rubric_evaluator");
+      coursesSelector.perform();
 
-    coursesRubrics = rubricsLoader.loadRubricsForCourses (
-      (List<SimpleCourse>)pageContext.getAttribute ("courses")
-    );
-  } catch (Exception e) {
-    %><bbNG:error exception="<%= e %>" /><br><%
-  }
+      courses = coursesSelector.filterByIds (selectedCourses);
 
-  pageContext.setAttribute ("coursesRubrics", coursesRubrics);
-%>
+      rubricsSelector = new RubricsSelectorAction (courses);
+      rubricsSelector.perform();
 
-  <c:choose>
-    <c:when test="${coursesRubrics.isEmpty()}">
-      <p>There are no courses rubrics to select from.</p>
-    </c:when>
+      coursesRubrics = rubricsSelector.getCoursesRubrics();
+    } catch (Exception e) {
+      %><bbNG:error exception="<%= e %>" /><br><%
+    }
 
-    <c:otherwise>
-      <c:forEach var="courseRubrics" items="${coursesRubrics.values()}">
-        <c:forEach var="courseRubric" items="${courseRubrics}">
-          <bbNG:dataElement>
-            <bbNG:checkboxElement
-               value="course-rubrics-${courseRubric.primaryKey}"
-               name="course-rubrics"
-               optionLabel="${courseRubric.title}"
-               isVertical="true" />
-          </bbNG:dataElement>
+    if (0 == coursesRubrics.size()) {
+      %><p>No rubrics are available to select from.</p><%
+    } else {
+      pageContext.setAttribute ("coursesRubrics", coursesRubrics);
+
+      %><bbNG:dataCollection>
+        <c:forEach var="courseRubrics" items="<%= coursesRubrics %>">
+          <bbNG:stepGroup title="${courseRubrics.key.courseId}">
+            <c:forEach var="rubrics" items="${courseRubrics.value}">
+              <bbNG:step
+                  id="course-rubrics-${courseRubrics.key.primaryKey}"
+                  title="Rubrics for ${courseRubrics.key.batchUid}"
+                  enableExpandCollapse="true">
+                <bbNG:dataElement>
+                  <bbNG:checkboxElement
+                      value="${rubrics.primaryKey}"
+                      name="rubrics-for-${courseRubrics.key.primaryKey}"
+                      optionLabel="${rubrics.title}"/>
+                </bbNG:dataElement>
+              </bbNG:step>
+            </c:forEach>
+          </bbNG:stepGroup>
         </c:forEach>
-      </c:forEach>
-    </c:otherwise>
-  </c:choose>
+
+        <bbNG:stepSubmit
+            title="Select Criteria for Rubrics"
+            instructions="Submit to select criteria from the above selected
+                rubrics.  Cancel to return to courses selection."
+            cancelUrl="?select=courses">
+
+          <bbNG:stepSubmitButton
+              label="Select Criteria for Rubrics"
+              url="?select=criteria" />
+        </bbNG:stepSubmit>
+      </bbNG:dataCollection><%
+    }
+  }
+%>
 
 </bbNG:includedPage>

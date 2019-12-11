@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 
 <%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ page import="_persistence.PersistenceManager" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bbNG" uri="/bbNG" %>
+
+<%
+  String selector = request.getParameter ("select");
+
+  if ((null == selector) || selector.isEmpty()) {
+    selector = "courses";
+  }
+
+  switch (selector) {
+    case "criteria":
+    case "rubrics":
+    case "courses": break;
+    default: selector = "courses";
+  }
+%>
 
 <bbNG:learningSystemPage
     title="Learn Rubric Arbiter"
     authentication="Y"
     entitlement="course.control_panel.VIEW">
+
   <bbNG:pageHeader>
     <bbNG:pageTitleBar title="Learn Rubric Arbiter" />
   </bbNG:pageHeader>
 
-  <bbNG:dataCollection>
-    <bbNG:step
-        id="courses-selection-step"
-        title="Courses Selection"
-        enableExpandCollapse="true"
-        instructions="Please select one or more courses for which
-            you would like to review the rubrics.">
-      <%@ include file="courses_selector.jsp" %>
-    </bbNG:step>
+  <%
+    if ("rubrics".equals (selector)) {
+      %><%@ include file="rubrics_selector.jsp" %><%
+    } else if ("criteria".equals (selector)) {
+      %><%@ include file="criteria_selector.jsp" %><%
+    } else {
+      %><%@ include file="courses_selector.jsp" %><%
+    }
+  %>
 
-    <bbNG:step
-        id="rubrics-selection-step"
-        title="Rubrics Selection"
-        enableExpandCollapse="true"
-        instructions="Please select one or more rubrics from the above
-            selected courses.">
-      <%@ include file="rubrics_selector.jsp" %>
-    </bbNG:step>
-
-    <bbNG:stepSubmit
-        title="Review Selected Rubric Information"
-        instructions="Submit to review the selected rubric information." />
-  </bbNG:dataCollection>
 </bbNG:learningSystemPage>
 
 <% PersistenceManager.getInstance().releaseConnection(); %>
