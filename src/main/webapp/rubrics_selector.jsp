@@ -17,7 +17,7 @@
   List<SimpleCourse> courses;
   Map<SimpleCourse, List<Rubric>> coursesRubrics = new HashMap<>();
 
-  if (0 == selectedCourses.length) {
+  if ((null == selectedCourses) || (0 == selectedCourses.length)) {
     %><p>No courses were selected to review rubrics for.</p><%
   } else {
     CoursesSelectorAction coursesSelector;
@@ -40,6 +40,7 @@
     if (0 == coursesRubrics.size()) {
       %><p>No rubrics are available to select from.</p><%
     } else {
+      %><p>Got here with <%= selectedCourses.length %> selected courses.</p><%
       pageContext.setAttribute ("coursesRubrics", coursesRubrics);
 
       %><bbNG:dataCollection>

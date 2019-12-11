@@ -31,19 +31,20 @@
     <c:otherwise>
       <bbNG:dataCollection>
         <bbNG:step
-           id="courses-selection-step"
-           title="Courses Selection"
-           enableExpandCollapse="true"
-           instructions="Please select one or more courses for which
-               you would like to review rubric information.">
+            id="courses-selection-step"
+            title="Courses Selection"
+            enableExpandCollapse="true"
+            instructions="Please select one or more courses for which
+                you would like to review rubric information.">
 
           <c:forEach var="simpleCourse" items="<%= courses %>">
             <bbNG:dataElement>
               <bbNG:checkboxElement
-                 value="${simpleCourse.primaryKey}"
-                 name="simple-courses"
-                 optionLabel="${simpleCourse.name}"
-                 isVertical="true" />
+                  id="simple-courses-${simpleCourse.primaryKey}"
+                  name="simple-courses"
+                  value="${simpleCourse.primaryKey}"
+                  optionLabel="${simpleCourse.name}"
+                  isVertical="true" />
             </bbNG:dataElement>
           </c:forEach><br>
         </bbNG:step>

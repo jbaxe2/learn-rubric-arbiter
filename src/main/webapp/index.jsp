@@ -6,21 +6,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bbNG" uri="/bbNG" %>
 
-<%
-  String selector = request.getParameter ("select");
-
-  if ((null == selector) || selector.isEmpty()) {
-    selector = "courses";
-  }
-
-  switch (selector) {
-    case "criteria":
-    case "rubrics":
-    case "courses": break;
-    default: selector = "courses";
-  }
-%>
-
 <bbNG:learningSystemPage
     title="Learn Rubric Arbiter"
     authentication="Y"
@@ -31,12 +16,25 @@
   </bbNG:pageHeader>
 
   <%
-    if ("rubrics".equals (selector)) {
-      %><%@ include file="rubrics_selector.jsp" %><%
-    } else if ("criteria".equals (selector)) {
-      %><%@ include file="criteria_selector.jsp" %><%
-    } else {
-      %><%@ include file="courses_selector.jsp" %><%
+    String selector = request.getParameter ("select");
+
+    if (null == selector) {
+      selector = "courses";
+    }
+
+    try {
+      switch (selector) {
+        case "criteria":
+          %><%@ include file="criteria_selector.jsp" %><%
+          break;
+        case "rubrics":
+          %><%@ include file="rubrics_selector.jsp" %><%
+          break;
+        default:
+          %><%@ include file="courses_selector.jsp" %><%
+      }
+    } catch (Exception e) {
+      %><bbNG:error exception="<%= e %>" /><br><%
     }
   %>
 
