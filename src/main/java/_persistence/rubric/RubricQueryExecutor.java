@@ -7,27 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import _error.ImproperRubricInfo;
+
 import _factory.RubricFactory;
+import _factory.RubricColumnFactory;
+
 import _persistence.query.PreparedQueryExecutor;
 
 import rubric.Rubric;
+import rubric.RubricColumn;
+import rubric.RubricRow;
 
 /**
  * The [RubricsQueryExecutor] class...
  */
 class RubricQueryExecutor extends PreparedQueryExecutor {
-  private List<Rubric> rubrics;
-
-  private RubricFactory rubricFactory;
-
   /**
    * The [RubricsQueryExecutor] constructor...
    */
   RubricQueryExecutor (PreparedStatement statement) {
     super (statement);
-
-    rubrics = new ArrayList<>();
-    rubricFactory = new RubricFactory();
   }
 
   /**
@@ -35,7 +33,7 @@ class RubricQueryExecutor extends PreparedQueryExecutor {
    */
   List<Rubric> retrieveRubricsForCourse() throws ImproperRubricInfo {
     try {
-      return rubrics = rubricFactory.createAll (statement.executeQuery());
+      return (new RubricFactory()).createAll (statement.executeQuery());
     } catch (SQLException e) {
       throw new ImproperRubricInfo (e.getMessage());
     }
@@ -45,24 +43,30 @@ class RubricQueryExecutor extends PreparedQueryExecutor {
    * The [retrieveRubric] method...
    */
   Rubric retrieveRubric() throws ImproperRubricInfo {
-    Rubric rubric;
-
     try {
-      rubric = rubricFactory.create (statement.executeQuery());
+      return (new RubricFactory()).create (statement.executeQuery());
     } catch (SQLException e) {
       throw new ImproperRubricInfo (e.getMessage());
     }
-
-    rubrics = new ArrayList<>();
-    rubrics.add (rubric);
-
-    return rubric;
   }
 
   /**
-   * The [getRubrics] method...
+   * The [retrieveRubricColumns] method...
    */
-  List<Rubric> getRubrics() {
-    return rubrics;
+  List<RubricColumn> retrieveRubricColumns() throws ImproperRubricInfo {
+    try {
+      return (new RubricColumnFactory()).createAll (statement.executeQuery());
+    } catch (SQLException e) {
+      throw new ImproperRubricInfo (e.getMessage());
+    }
+  }
+
+  /**
+   * The [retrieveRubricRows] method...
+   */
+  List<RubricRow> retrieveRubricRows() throws ImproperRubricInfo {
+    List<RubricRow> rubricRows = new ArrayList<>();
+
+    return rubricRows;
   }
 }

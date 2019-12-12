@@ -21,7 +21,7 @@ public class RubricLink {
   /**
    * The [RubricLink] constructor...
    */
-  RubricLink (
+  public RubricLink (
     String primaryKey, String rubricPk, int version, String evalEntityPk,
     String subRubricAssocPk, boolean visibleInd, boolean usedForGradingInd
   ) {

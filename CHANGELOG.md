@@ -1,5 +1,9 @@
 ## Learn Rubric Arbiter
 
+## 0.1.2
+- More work on courses and rubrics selectors, with refactoring.
+- Start of work on rubric criteria selectors.
+
 ## 0.1.1
 - More work on courses and rubrics selectors.
 - Some refactoring.

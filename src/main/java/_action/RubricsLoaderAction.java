@@ -1,5 +1,6 @@
 package _action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,26 @@ public class RubricsLoaderAction implements Actionable {
     RubricsLoader loader = new RubricsLoader (manager.getConnection());
 
     coursesRubrics = loader.loadRubricsForCourses (courses);
+  }
+
+  /**
+   * The [filterByIds] method...
+   */
+  public Map<SimpleCourse, List<Rubric>> filterByIds (String[] rubricIds) {
+    Map<SimpleCourse, List<Rubric>> filteredRubrics = new HashMap<>();
+
+    for (String rubricId : rubricIds) {
+      for (SimpleCourse simpleCourse : courses) {
+        for (Rubric rubric : coursesRubrics.get (simpleCourse)) {
+          if (rubricId.equals (rubric.getPrimaryKey())) {
+            filteredRubrics.putIfAbsent (simpleCourse, new ArrayList<>());
+            filteredRubrics.get (simpleCourse).add (rubric);
+          }
+        }
+      }
+    }
+
+    return filteredRubrics;
   }
 
   /**

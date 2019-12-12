@@ -18,7 +18,6 @@
     %><p>No courses were selected to review rubrics for.</p><%
   } else {
     Map<SimpleCourse, List<Rubric>> coursesRubrics = new HashMap<>();
-    List<SimpleCourse> courses;
 
     try {
       CoursesRetrieverAction coursesRetrieverAction =
@@ -26,7 +25,8 @@
 
       coursesRetrieverAction.perform();
 
-      courses = coursesRetrieverAction.filterByIds (selectedCourses);
+      List<SimpleCourse> courses =
+        coursesRetrieverAction.filterByIds (selectedCourses);
 
       RubricsLoaderAction rubricsLoaderAction = new RubricsLoaderAction (courses);
       rubricsLoaderAction.perform();
@@ -83,11 +83,13 @@
                       rubrics.  Cancel to return to courses selection."
                   cancelUrl="?select=courses">
 
-                <bbNG:stepSubmitButton
-                    label="Select Criteria for Rubrics"
-                    url="?select=criteria" />
+                <bbNG:stepSubmitButton label="Select Criteria for Rubrics" />
               </bbNG:stepSubmit>
             </bbNG:dataCollection>
+
+            <c:forEach var="selectedCourse" items="<%= selectedCourses %>">
+              <bbNG:hiddenElement name="simple-courses" value="${selectedCourse}" />
+            </c:forEach>
           </bbNG:form>
         </c:otherwise>
       </c:choose>

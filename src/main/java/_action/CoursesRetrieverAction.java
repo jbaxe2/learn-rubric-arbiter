@@ -63,8 +63,6 @@ public class CoursesRetrieverAction implements Actionable {
       for (SimpleCourse course : courses) {
         if (courseId.equals (course.getPrimaryKey())) {
           filteredCourses.add (course);
-
-          continue;
         }
       }
     }

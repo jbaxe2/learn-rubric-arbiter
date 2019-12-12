@@ -9,7 +9,9 @@ import java.util.Map;
 import _error.ImproperRubricInfo;
 
 import course.SimpleCourse;
+
 import rubric.Rubric;
+import rubric.RubricColumn;
 
 /**
  * The [RubricsLoader] class...
@@ -72,5 +74,23 @@ public class RubricsLoader {
     }
 
     return rubricExecutor.retrieveRubric();
+  }
+
+  /**
+   * The [loadRubricColumnsByRubricId] method...
+   */
+  public List<RubricColumn> loadRubricColumnsByRubricId (String rubricId)
+      throws ImproperRubricInfo {
+    RubricQueryExecutor rubricExecutor;
+
+    try {
+      rubricExecutor = new RubricQueryExecutor (
+        queryBuilder.buildRetrieveColumnsByRubricIdQuery (rubricId)
+      );
+    } catch (Exception e) {
+      throw new ImproperRubricInfo (e.getMessage());
+    }
+
+    return rubricExecutor.retrieveRubricColumns();
   }
 }

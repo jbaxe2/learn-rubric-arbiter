@@ -25,7 +25,7 @@ public class RubricCellEval {
   /**
    * The [RubricCellEval] constructor...
    */
-  RubricCellEval (
+  public RubricCellEval (
     String primaryKey, String rubricEvalPk, String rowPk, String cellPk,
     String feedback, FormatType feedbackType, float selectedPercent,
     boolean overrideInd

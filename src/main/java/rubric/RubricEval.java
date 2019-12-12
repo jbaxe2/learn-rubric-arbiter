@@ -41,7 +41,7 @@ public class RubricEval {
   /**
    * The [RubricEval] constructor...
    */
-  RubricEval (
+  public RubricEval (
     String primaryKey, String linkPk, String associationPk, String reviewerUserPk,
     String reviewerUsername, String respondentUserPk, String respondentUsername,
     boolean completedInd, Date submissionDate, String comments,

@@ -15,7 +15,7 @@ public class RubricColumn {
   /**
    * The [RubricColumn] constructor...
    */
-  RubricColumn (
+  public RubricColumn (
     String primaryKey, String rubricPk, String header, int position
   ) {
     this.primaryKey = primaryKey;

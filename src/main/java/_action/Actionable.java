@@ -8,4 +8,9 @@ public interface Actionable {
    * The [perform] method...
    */
   void perform() throws Exception;
+
+  /**
+   * The [filterByIds] method...
+   */
+  Object filterByIds (String[] filterIds);
 }
