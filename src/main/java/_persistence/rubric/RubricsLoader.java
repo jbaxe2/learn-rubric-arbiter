@@ -1,7 +1,10 @@
 package _persistence.rubric;
 
 import java.sql.Connection;
-import java.util.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import _error.ImproperRubricInfo;
 

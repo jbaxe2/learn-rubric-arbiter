@@ -94,6 +94,8 @@ public class PersistenceManager {
   public void releaseConnection() {
     if (null != connection) {
       connectionManager.releaseConnection (connection);
+
+      connection = null;
     }
   }
 }

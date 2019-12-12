@@ -1,8 +1,12 @@
 ## Learn Rubric Arbiter
 
+## 0.1.1
+- More work on courses and rubrics selectors.
+- Some refactoring.
+
 ## 0.1.0
 - Reworking workflow for selecting courses, rubrics, etc.
-- Created actionable parts, such as courses and rubrics selectors.
+- Created actionable parts, such as courses and rubrics selector actions.
 
 ## 0.0.10
 - Work on course rubrics selector.

@@ -15,9 +15,9 @@ import course.SimpleCourse;
 import course.SimpleCoursesRetriever;
 
 /**
- * The [CoursesSelectorAction] class...
+ * The [CoursesRetrieverAction] class...
  */
-public class CoursesSelectorAction implements Actionable {
+public class CoursesRetrieverAction implements Actionable {
   private List<SimpleCourse> courses;
 
   final private HttpServletRequest request;
@@ -25,9 +25,9 @@ public class CoursesSelectorAction implements Actionable {
   final private String roleId;
 
   /**
-   * The [CoursesSelectorAction] constructor...
+   * The [CoursesRetrieverAction] constructor...
    */
-  public CoursesSelectorAction (HttpServletRequest request, String roleId) {
+  public CoursesRetrieverAction (HttpServletRequest request, String roleId) {
     this.request = request;
     this.roleId = roleId;
 

@@ -2,8 +2,8 @@
     java.util.HashMap,
     java.util.List,
     java.util.Map,
-    _action.CoursesSelectorAction,
-    _action.RubricsSelectorAction,
+    _action.CoursesRetrieverAction,
+    _action.RubricsLoaderAction,
     rubric.Rubric" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -14,66 +14,84 @@
 <%
   String[] selectedCourses = request.getParameterValues ("simple-courses");
 
-  List<SimpleCourse> courses;
-  Map<SimpleCourse, List<Rubric>> coursesRubrics = new HashMap<>();
-
   if ((null == selectedCourses) || (0 == selectedCourses.length)) {
     %><p>No courses were selected to review rubrics for.</p><%
   } else {
-    CoursesSelectorAction coursesSelector;
-    RubricsSelectorAction rubricsSelector;
+    Map<SimpleCourse, List<Rubric>> coursesRubrics = new HashMap<>();
+    List<SimpleCourse> courses;
 
     try {
-      coursesSelector = new CoursesSelectorAction (request, "rubric_evaluator");
-      coursesSelector.perform();
+      CoursesRetrieverAction coursesRetrieverAction =
+        new CoursesRetrieverAction (request, "rubric_evaluator");
 
-      courses = coursesSelector.filterByIds (selectedCourses);
+      coursesRetrieverAction.perform();
 
-      rubricsSelector = new RubricsSelectorAction (courses);
-      rubricsSelector.perform();
+      courses = coursesRetrieverAction.filterByIds (selectedCourses);
 
-      coursesRubrics = rubricsSelector.getCoursesRubrics();
+      RubricsLoaderAction rubricsLoaderAction = new RubricsLoaderAction (courses);
+      rubricsLoaderAction.perform();
+
+      coursesRubrics = rubricsLoaderAction.getCoursesRubrics();
     } catch (Exception e) {
       %><bbNG:error exception="<%= e %>" /><br><%
     }
 
-    if (0 == coursesRubrics.size()) {
-      %><p>No rubrics are available to select from.</p><%
-    } else {
-      %><p>Got here with <%= selectedCourses.length %> selected courses.</p><%
-      pageContext.setAttribute ("coursesRubrics", coursesRubrics);
+    pageContext.setAttribute ("coursesRubrics", coursesRubrics);
 
-      %><bbNG:dataCollection>
-        <c:forEach var="courseRubrics" items="<%= coursesRubrics %>">
-          <bbNG:stepGroup title="${courseRubrics.key.courseId}">
-            <c:forEach var="rubrics" items="${courseRubrics.value}">
-              <bbNG:step
-                  id="course-rubrics-${courseRubrics.key.primaryKey}"
-                  title="Rubrics for ${courseRubrics.key.batchUid}"
-                  enableExpandCollapse="true">
-                <bbNG:dataElement>
-                  <bbNG:checkboxElement
-                      value="${rubrics.primaryKey}"
-                      name="rubrics-for-${courseRubrics.key.primaryKey}"
-                      optionLabel="${rubrics.title}"/>
-                </bbNG:dataElement>
-              </bbNG:step>
-            </c:forEach>
-          </bbNG:stepGroup>
-        </c:forEach>
+    %>
+      <c:choose>
+        <c:when test="${0 == coursesRubrics.size()}">
+          <p>No rubrics are available to select from.</p>
+        </c:when>
 
-        <bbNG:stepSubmit
-            title="Select Criteria for Rubrics"
-            instructions="Submit to select criteria from the above selected
-                rubrics.  Cancel to return to courses selection."
-            cancelUrl="?select=courses">
+        <c:otherwise>
+          <bbNG:form method="POST" action="?select=criteria">
+            <bbNG:dataCollection>
+              <c:forEach var="courseRubrics" items="<%= coursesRubrics %>">
+                <c:choose>
+                  <c:when test="${0 == courseRubrics.value.size()}">
+                    <p>
+                      No course rubrics available for
+                      ${courseRubrics.key.batchUid}.
+                    </p>
+                  </c:when>
 
-          <bbNG:stepSubmitButton
-              label="Select Criteria for Rubrics"
-              url="?select=criteria" />
-        </bbNG:stepSubmit>
-      </bbNG:dataCollection><%
-    }
+                  <c:otherwise>
+                    <c:forEach var="rubrics" items="${courseRubrics.value}">
+                      <bbNG:step
+                          id="course-rubrics-${courseRubrics.key.primaryKey}"
+                          title="Rubrics for: ${courseRubrics.key.name}
+                              (${courseRubrics.key.batchUid})"
+                          enableExpandCollapse="true">
+                        <bbNG:dataElement>
+                          <bbNG:checkboxElement
+                              id="rubrics-for-${courseRubrics.key.primaryKey}"
+                              value="${rubrics.primaryKey}"
+                              name="course-rubrics"
+                              optionLabel="${rubrics.title}"/>
+                        </bbNG:dataElement>
+                      </bbNG:step>
+                    </c:forEach>
+                  </c:otherwise>
+                </c:choose>
+
+              </c:forEach>
+
+              <bbNG:stepSubmit
+                  title="Select Criteria for Rubrics"
+                  instructions="Submit to select criteria from the above selected
+                      rubrics.  Cancel to return to courses selection."
+                  cancelUrl="?select=courses">
+
+                <bbNG:stepSubmitButton
+                    label="Select Criteria for Rubrics"
+                    url="?select=criteria" />
+              </bbNG:stepSubmit>
+            </bbNG:dataCollection>
+          </bbNG:form>
+        </c:otherwise>
+      </c:choose>
+    <%
   }
 %>
 

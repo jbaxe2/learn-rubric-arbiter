@@ -11,17 +11,17 @@ import course.SimpleCourse;
 import rubric.Rubric;
 
 /**
- * The [RubricsSelectorAction] class...
+ * The [RubricsLoaderAction] class...
  */
-public class RubricsSelectorAction implements Actionable {
+public class RubricsLoaderAction implements Actionable {
   private Map<SimpleCourse, List<Rubric>> coursesRubrics;
 
   final private List<SimpleCourse> courses;
 
   /**
-   * The [RubricsSelectorAction] constructor...
+   * The [RubricsLoaderAction] constructor...
    */
-  public RubricsSelectorAction (List<SimpleCourse> courses) {
+  public RubricsLoaderAction (List<SimpleCourse> courses) {
     this.courses = courses;
 
     coursesRubrics = new HashMap<>();
