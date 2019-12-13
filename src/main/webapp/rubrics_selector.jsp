@@ -74,7 +74,6 @@
                     </c:forEach>
                   </c:otherwise>
                 </c:choose>
-
               </c:forEach>
 
               <bbNG:stepSubmit
@@ -82,7 +81,6 @@
                   instructions="Submit to select criteria from the above selected
                       rubrics.  Cancel to return to courses selection."
                   cancelUrl="?select=courses">
-
                 <bbNG:stepSubmitButton label="Select Criteria for Rubrics" />
               </bbNG:stepSubmit>
             </bbNG:dataCollection>

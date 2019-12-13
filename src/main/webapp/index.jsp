@@ -24,6 +24,9 @@
 
     try {
       switch (selector) {
+        case "formulation":
+          %><%@ include file="formulation_selector.jsp" %><%
+          break;
         case "criteria":
           %><%@ include file="criteria_selector.jsp" %><%
           break;
