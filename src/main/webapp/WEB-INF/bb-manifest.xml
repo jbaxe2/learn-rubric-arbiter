@@ -7,7 +7,7 @@
     <description
         value="The Learn Rubric Arbiter is a simple tool allowing those with a
             particular role in courses to review rubric data in those courses." />
-    <version value="0.1.3" />
+    <version value="0.1.4" />
 
     <requires>
       <bbversion value="9.1" />
@@ -30,13 +30,6 @@
         </description>
 
         <links>
-          <link>
-            <type value="course_tool" />
-            <name value="Learn Rubric Arbiter" />
-            <url value="index.jsp" />
-            <description value="Learn Rubric Arbiter is a simple rubric report tool." />
-          </link>
-
           <link>
             <type value="system_tool" />
             <name value="Learn Rubric Arbiter" />

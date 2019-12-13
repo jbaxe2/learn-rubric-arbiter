@@ -45,6 +45,10 @@
         </c:when>
 
         <c:otherwise>
+          <p>
+            Please select one or more rubrics from the previously selected courses.
+          </p>
+
           <bbNG:form method="POST" action="?select=criteria">
             <bbNG:dataCollection>
               <c:forEach var="courseRubrics" items="<%= coursesRubrics %>">

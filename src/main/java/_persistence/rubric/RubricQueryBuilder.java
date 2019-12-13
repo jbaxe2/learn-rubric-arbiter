@@ -38,7 +38,7 @@ class RubricQueryBuilder extends PreparedQueryBuilder {
     String query = "SELECT * FROM rubric WHERE pk1 = ?";
 
     PreparedStatement statement = connection.prepareStatement (query);
-    statement.setString (1, rubricId.split ("_")[1]);
+    statement.setString (1, rubricId);
 
     return statement;
   }
@@ -49,10 +49,10 @@ class RubricQueryBuilder extends PreparedQueryBuilder {
   PreparedStatement buildRetrieveColumnsByRubricIdQuery (String rubricId)
       throws SQLException {
     String query =
-      "SELECT * FROM rubric_column WHERE rubric_pk1 = ? GROUP BY rubric_pk1";
+      "SELECT * FROM rubric_column WHERE rubric_pk1 = ?";
 
     PreparedStatement statement = connection.prepareStatement (query);
-    statement.setString (1, rubricId.split ("_")[1]);
+    statement.setString (1, rubricId);
 
     return statement;
   }
@@ -63,10 +63,10 @@ class RubricQueryBuilder extends PreparedQueryBuilder {
   PreparedStatement buildRetrieveRowsByRubricIdQuery (String rubricId)
       throws SQLException {
     String query =
-      "SELECT * FROM rubric_row WHERE rubric_pk1 = ? GROUP BY rubric_pk1";
+      "SELECT * FROM rubric_row WHERE rubric_pk1 = ?";
 
     PreparedStatement statement = connection.prepareStatement (query);
-    statement.setString (1, rubricId.split ("_")[1]);
+    statement.setString (1, rubricId);
 
     return statement;
   }

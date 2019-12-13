@@ -3,13 +3,13 @@ package _persistence.rubric;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import _error.ImproperRubricInfo;
 
-import _factory.RubricFactory;
 import _factory.RubricColumnFactory;
+import _factory.RubricFactory;
+import _factory.RubricRowFactory;
 
 import _persistence.query.PreparedQueryExecutor;
 
@@ -65,8 +65,10 @@ class RubricQueryExecutor extends PreparedQueryExecutor {
    * The [retrieveRubricRows] method...
    */
   List<RubricRow> retrieveRubricRows() throws ImproperRubricInfo {
-    List<RubricRow> rubricRows = new ArrayList<>();
-
-    return rubricRows;
+    try {
+      return (new RubricRowFactory()).createAll (statement.executeQuery());
+    } catch (SQLException e) {
+      throw new ImproperRubricInfo (e.getMessage());
+    }
   }
 }

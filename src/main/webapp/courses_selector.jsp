@@ -29,14 +29,17 @@
     </c:when>
 
     <c:otherwise>
+      <p>
+        Please select one or more courses for which you would like to review
+        rubric information.
+      </p>
+
       <bbNG:form method="POST" action="?select=rubrics">
         <bbNG:dataCollection>
           <bbNG:step
               id="courses-selection-step"
               title="Courses Selection"
-              enableExpandCollapse="true"
-              instructions="Please select one or more courses for which
-                  you would like to review rubric information.">
+              enableExpandCollapse="true">
 
             <c:forEach var="simpleCourse" items="<%= courses %>">
               <bbNG:dataElement>

@@ -1,7 +1,10 @@
 <%@ page import="
-  _action.*,
-  rubric.*" %>
-<%@ page import="java.util.*" %>
+  java.util.HashMap,
+  _action.CoursesRetrieverAction,
+  _action.RubricsLoaderAction,
+  _action.RubricRowsLoaderAction,
+  rubric.Rubric,
+  rubric.RubricRow" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bbNG" uri="/bbNG" %>
@@ -18,9 +21,7 @@
     %><p>No rubrics were selected to review criteria for.</p><%
   } else {
     Map<SimpleCourse, List<Rubric>> coursesRubrics = new HashMap<>();
-    Map<Rubric, List<RubricColumn>> rubricsCriteria;
-
-    List<Rubric> courseRubrics = new ArrayList<>();
+    Map<Rubric, List<RubricRow>> rubricsCriteria = new HashMap<>();
 
     try {
       CoursesRetrieverAction coursesRetrieverAction =
@@ -40,7 +41,6 @@
     }
 
     pageContext.setAttribute ("coursesRubrics", coursesRubrics);
-    pageContext.setAttribute ("courseRubrics", courseRubrics);
 
     %>
       <c:choose>
@@ -49,24 +49,35 @@
         </c:when>
 
         <c:otherwise>
+          <p>
+            Please select one or more criteria from one or more of the previously
+            selected course rubrics.
+          </p>
+
           <bbNG:form method="POST" action="?select=formulation">
             <bbNG:dataCollection>
-              <c:forEach var="courseRubrics" items="<%= coursesRubrics %>">
+              <c:forEach var="courseWithRubrics" items="<%= coursesRubrics %>">
+                <c:set var="courseRubrics" scope="page" value="${courseWithRubrics.value}" />
+
                 <bbNG:step
-                    id="rubric-for-${courseRubrics.key.primaryKey}"
-                    title="${courseRubrics.key.batchUid}"
+                    id="rubric-for-${courseWithRubrics.key.primaryKey}"
+                    title="${courseWithRubrics.key.batchUid}"
                     enableExpandCollapse="true">
                   <%
-                    RubricColumnsLoaderAction columnsLoaderAction =
-                      new RubricColumnsLoaderAction (courseRubrics);
+                    List<Rubric> courseRubrics;
 
                     try {
-                      columnsLoaderAction.perform();
+                      courseRubrics =
+                        (List<Rubric>)pageContext.getAttribute ("courseRubrics");
+
+                      RubricRowsLoaderAction rowsLoaderAction =
+                        new RubricRowsLoaderAction (courseRubrics);
+
+                      rowsLoaderAction.perform();
+                      rubricsCriteria = rowsLoaderAction.getRubricRows();
                     } catch (Exception e) {
                       %><bbNG:error exception="<%= e %>" /><br><%
                     }
-
-                    rubricsCriteria = columnsLoaderAction.getRubricColumns();
 
                     pageContext.setAttribute ("rubricsCriteria", rubricsCriteria);
                   %>
@@ -81,7 +92,6 @@
                         <bbNG:step
                             id="course-rubric-${rubricCriteria.key.primaryKey}"
                             title="Rubric ${rubricCriteria.key.title}"
-                            enableExpandCollapse="true"
                             subStep="true">
                           <c:forEach var="criteria" items="${rubricCriteria.value}">
                             <bbNG:dataElement>
@@ -107,6 +117,14 @@
                 <bbNG:stepSubmitButton label="Select Formulation of Criteria" />
               </bbNG:stepSubmit>
             </bbNG:dataCollection>
+
+            <c:forEach var="selectedCourse" items="<%= selectedCourses %>">
+              <bbNG:hiddenElement name="simple-courses" value="${selectedCourse}" />
+            </c:forEach>
+
+            <c:forEach var="courseRubric" items="<%= selectedRubrics %>">
+              <bbNG:hiddenElement name="course-rubrics" value="${courseRubric}" />
+            </c:forEach>
           </bbNG:form>
         </c:otherwise>
       </c:choose>
