@@ -10,7 +10,9 @@ import _error.ImproperRubricInfo;
 
 import course.SimpleCourse;
 
-import rubric.*;
+import rubric.Rubric;
+import rubric.RubricColumn;
+import rubric.RubricRow;
 
 /**
  * The [RubricsLoader] class...

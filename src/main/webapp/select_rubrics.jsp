@@ -15,7 +15,7 @@
   String[] selectedCourses = request.getParameterValues ("simple-courses");
 
   if ((null == selectedCourses) || (0 == selectedCourses.length)) {
-    %><p>No courses were selected to review rubrics for.</p><%
+    %><p>No courses were selected for which to review rubrics.</p><%
   } else {
     Map<SimpleCourse, List<Rubric>> coursesRubrics = new HashMap<>();
 
@@ -45,9 +45,10 @@
         </c:when>
 
         <c:otherwise>
-          <p>
-            Please select one or more rubrics from the previously selected courses.
-          </p>
+          <h3 style="margin-left: 25px;">
+            Please select one or more rubrics from the previously selected courses,
+            from which you would like to review criteria.
+          </h3>
 
           <bbNG:form method="POST" action="?select=criteria">
             <bbNG:dataCollection>

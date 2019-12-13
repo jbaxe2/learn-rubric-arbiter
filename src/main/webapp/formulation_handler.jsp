@@ -2,8 +2,7 @@
 <%@ taglib prefix="bbNG" uri="/bbNG" %>
 
 <bbNG:includedPage authentication="Y" entitlement="course.control_panel.VIEW">
-  <p>
-    Here will be the options to select various formulations for the rubric
-    criteria selected on the previous page.
-  </p>
+  <p>Here will be the results of formulating course rubric criteria.</p><br>
+
+  <p>Start over: <a href="?select=courses">select courses</a>.</p>
 </bbNG:includedPage>

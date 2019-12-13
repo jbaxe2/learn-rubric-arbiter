@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import _persistence.query.PreparedQueryBuilder;
+import _persistence._query.PreparedQueryBuilder;
 
 /**
  * The [RubricQueryBuilder] class...

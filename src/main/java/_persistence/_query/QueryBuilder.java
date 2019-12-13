@@ -1,4 +1,4 @@
-package _persistence.query;
+package _persistence._query;
 
 /**
  * The [QueryBuilder] interface...

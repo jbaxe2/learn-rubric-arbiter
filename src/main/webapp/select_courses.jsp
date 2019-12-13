@@ -29,10 +29,10 @@
     </c:when>
 
     <c:otherwise>
-      <p>
+      <h3 style="margin-left: 25px;">
         Please select one or more courses for which you would like to review
         rubric information.
-      </p>
+      </h3>
 
       <bbNG:form method="POST" action="?select=rubrics">
         <bbNG:dataCollection>

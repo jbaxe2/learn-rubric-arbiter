@@ -16,9 +16,9 @@
   String[] selectedRubrics = request.getParameterValues ("course-rubrics");
 
   if ((null == selectedCourses) || (0 == selectedCourses.length)) {
-    %><p>No courses were selected to review rubrics for.</p><%
+    %><p>No courses were selected for which to review rubrics.</p><%
   } else if ((null == selectedRubrics) || (0 == selectedRubrics.length)) {
-    %><p>No rubrics were selected to review criteria for.</p><%
+    %><p>No rubrics were selected for which to review criteria.</p><%
   } else {
     Map<SimpleCourse, List<Rubric>> coursesRubrics = new HashMap<>();
     Map<Rubric, List<RubricRow>> rubricsCriteria = new HashMap<>();
@@ -49,10 +49,10 @@
         </c:when>
 
         <c:otherwise>
-          <p>
+          <h3 style="margin-left: 25px;">
             Please select one or more criteria from one or more of the previously
             selected course rubrics.
-          </p>
+          </h3>
 
           <bbNG:form method="POST" action="?select=formulation">
             <bbNG:dataCollection>
@@ -89,9 +89,11 @@
 
                     <c:otherwise>
                       <c:forEach var="rubricCriteria" items="${rubricsCriteria}">
+                        <br>
                         <bbNG:step
                             id="course-rubric-${rubricCriteria.key.primaryKey}"
                             title="Rubric ${rubricCriteria.key.title}"
+                            enableExpandCollapse="true"
                             subStep="true">
                           <c:forEach var="criteria" items="${rubricCriteria.value}">
                             <bbNG:dataElement>

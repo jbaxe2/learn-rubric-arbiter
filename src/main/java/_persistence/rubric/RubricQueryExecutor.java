@@ -11,7 +11,7 @@ import _factory.RubricColumnFactory;
 import _factory.RubricFactory;
 import _factory.RubricRowFactory;
 
-import _persistence.query.PreparedQueryExecutor;
+import _persistence._query.PreparedQueryExecutor;
 
 import rubric.Rubric;
 import rubric.RubricColumn;

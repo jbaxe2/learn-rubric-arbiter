@@ -18,23 +18,29 @@
   <%
     String selector = request.getParameter ("select");
 
-    if (null == selector) {
-      selector = "courses";
-    }
-
     try {
-      switch (selector) {
-        case "formulation":
-          %><%@ include file="formulation_selector.jsp" %><%
-          break;
-        case "criteria":
-          %><%@ include file="criteria_selector.jsp" %><%
-          break;
-        case "rubrics":
-          %><%@ include file="rubrics_selector.jsp" %><%
-          break;
-        default:
-          %><%@ include file="courses_selector.jsp" %><%
+      if (null == selector) {
+        String formulate = request.getParameter ("formulate");
+
+        if ("true".equals (formulate)) {
+          %><%@ include file="formulation_handler.jsp" %><%
+        } else {
+          %><%@ include file="select_courses.jsp" %><%
+        }
+      } else {
+        switch (selector) {
+          case "formulation":
+            %><%@ include file="select_formulation.jsp" %><%
+            break;
+          case "criteria":
+            %><%@ include file="select_criteria.jsp" %><%
+            break;
+          case "rubrics":
+            %><%@ include file="select_rubrics.jsp" %><%
+            break;
+          default:
+            %><%@ include file="select_courses.jsp" %><%
+        }
       }
     } catch (Exception e) {
       %><bbNG:error exception="<%= e %>" /><br><%

@@ -1,5 +1,10 @@
 ## Learn Rubric Arbiter
 
+## 0.1.5
+- More work on various selectors.
+- Start of work on formulation handler.
+- Some refactoring.
+
 ## 0.1.4
 - More work on criteria selector with some refactoring.
 - Start of work on formulation selector.
