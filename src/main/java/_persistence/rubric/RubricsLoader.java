@@ -10,9 +10,7 @@ import _error.ImproperRubricInfo;
 
 import course.SimpleCourse;
 
-import rubric.Rubric;
-import rubric.RubricColumn;
-import rubric.RubricRow;
+import rubric.*;
 
 /**
  * The [RubricsLoader] class...
@@ -43,24 +41,6 @@ public class RubricsLoader {
   }
 
   /**
-   * The [loadRubricsByCourseId] method...
-   */
-  public List<Rubric> loadRubricsByCourseId (String courseId)
-      throws ImproperRubricInfo {
-    RubricQueryExecutor rubricExecutor;
-
-    try {
-      rubricExecutor = new RubricQueryExecutor (
-        queryBuilder.buildRetrieveRubricsByCourseIdQuery (courseId)
-      );
-    } catch (Exception e) {
-      throw new ImproperRubricInfo (e.getMessage());
-    }
-
-    return rubricExecutor.retrieveRubricsForCourse();
-  }
-
-  /**
    * The [loadRubricById] method...
    */
   public Rubric loadRubricById (String rubricId) throws ImproperRubricInfo {
@@ -78,14 +58,32 @@ public class RubricsLoader {
   }
 
   /**
+   * The [loadRubricsByCourseId] method...
+   */
+  public List<Rubric> loadRubricsByCourseId (String courseId)
+      throws ImproperRubricInfo {
+    RubricsForCourseQueryExecutor rubricExecutor;
+
+    try {
+      rubricExecutor = new RubricsForCourseQueryExecutor (
+        queryBuilder.buildRetrieveRubricsByCourseIdQuery (courseId)
+      );
+    } catch (Exception e) {
+      throw new ImproperRubricInfo (e.getMessage());
+    }
+
+    return rubricExecutor.retrieveRubricsForCourse();
+  }
+
+  /**
    * The [loadRubricColumnsByRubricId] method...
    */
   public List<RubricColumn> loadRubricColumnsByRubricId (String rubricId)
       throws ImproperRubricInfo {
-    RubricQueryExecutor rubricExecutor;
+    RubricColumnsQueryExecutor rubricExecutor;
 
     try {
-      rubricExecutor = new RubricQueryExecutor (
+      rubricExecutor = new RubricColumnsQueryExecutor (
         queryBuilder.buildRetrieveColumnsByRubricIdQuery (rubricId)
       );
     } catch (Exception e) {
@@ -100,10 +98,10 @@ public class RubricsLoader {
    */
   public List<RubricRow> loadRubricRowsByRubricId (String rubricId)
       throws ImproperRubricInfo {
-    RubricQueryExecutor rubricExecutor;
+    RubricRowsQueryExecutor rubricExecutor;
 
     try {
-      rubricExecutor = new RubricQueryExecutor (
+      rubricExecutor = new RubricRowsQueryExecutor (
         queryBuilder.buildRetrieveRowsByRubricIdQuery (rubricId)
       );
     } catch (Exception e) {
@@ -111,5 +109,24 @@ public class RubricsLoader {
     }
 
     return rubricExecutor.retrieveRubricRows();
+  }
+
+  /**
+   * The [loadRubricCellByColumnRowIds] method...
+   */
+  public List<RubricCell> loadRubricCellByColumnRowIds (
+    String columnId, String rowId
+  ) throws ImproperRubricInfo {
+    RubricCellQueryExecutor rubricExecutor;
+
+    try {
+      rubricExecutor = new RubricCellQueryExecutor (
+        queryBuilder.buildRetrieveRubricCellByColumnRowIds (columnId, rowId)
+      );
+    } catch (Exception e) {
+      throw new ImproperRubricInfo (e.getMessage());
+    }
+
+    return rubricExecutor.retrieveRubricCell();
   }
 }

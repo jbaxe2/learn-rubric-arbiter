@@ -1,5 +1,10 @@
 ## Learn Rubric Arbiter
 
+## 0.1.6
+- Work on formulation code.
+  - Created common interface, factories, and formulatables.
+- Some refactoring of query executors.
+
 ## 0.1.5
 - More work on various selectors.
 - Start of work on formulation handler.

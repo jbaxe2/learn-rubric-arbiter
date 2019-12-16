@@ -70,4 +70,36 @@ class RubricQueryBuilder extends PreparedQueryBuilder {
 
     return statement;
   }
+
+  /**
+   * The [buildRetrieveRubricCellByColumnRowIds] method...
+   */
+  PreparedStatement buildRetrieveRubricCellByColumnRowIds (
+    String columnId, String rowId
+  ) throws SQLException {
+    String query = "SELECT * FROM rubric_cell WHERE " +
+      "rubric_column_pk1 = ? AND rubric_row_pk1 = ?";
+
+    PreparedStatement statement = connection.prepareStatement (query);
+    statement.setString (1, columnId);
+    statement.setString (2, rowId);
+
+    return statement;
+  }
+
+  /**
+   * The [buildRetrieveRubricCellEvalsByRowAndCellIds] method...
+   */
+  PreparedStatement buildRetrieveRubricCellEvalsByRowAndCellIds (
+    String rowId, String cellId
+  ) throws SQLException {
+    String query = "SELECT * FROM rubric_cell_eval WHERE " +
+      "rubric_row_pk1 = ? AND rubric_cell_pk1 = ?";
+
+    PreparedStatement statement = connection.prepareStatement (query);
+    statement.setString (1, rowId);
+    statement.setString (2, cellId);
+
+    return statement;
+  }
 }

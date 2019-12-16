@@ -44,9 +44,9 @@
       }
     } catch (Exception e) {
       %><bbNG:error exception="<%= e %>" /><br><%
+    } finally {
+      PersistenceManager.getInstance().releaseConnection();
     }
   %>
 
 </bbNG:learningSystemPage>
-
-<% PersistenceManager.getInstance().releaseConnection(); %>
