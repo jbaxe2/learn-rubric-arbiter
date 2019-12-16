@@ -23,8 +23,8 @@
     } else {
       try {
         Formulatable formulatable = FormulationFactory.createFormulatable (
-          request, "rubric_evaluator", selectedCourses, selectedRubrics,
-          selectedCriteria, selectedFormulation
+          selectedFormulation, request, "rubric_evaluator",
+          selectedCourses, selectedRubrics, selectedCriteria
         );
 
         if (null != formulatable) {

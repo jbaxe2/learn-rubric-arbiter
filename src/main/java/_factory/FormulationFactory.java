@@ -1,9 +1,11 @@
 package _factory;
 
+import javax.servlet.http.HttpServletRequest;
+
+import _error.InvalidFormulation;
+
 import formulation.BreakdownFormulation;
 import formulation.Formulatable;
-
-import javax.servlet.http.*;
 
 /**
  * The [FormulationFactory] class...
@@ -13,10 +15,9 @@ public class FormulationFactory {
    * The [createFormulatable] method...
    */
   public static Formulatable createFormulatable (
-    HttpServletRequest request, String roleId,
-    String[] courseIds, String[] rubricIds, String[] criteriaIds,
-    String formulationType
-  ) throws Exception {
+    String formulationType, HttpServletRequest request, String roleId,
+    String[] courseIds, String[] rubricIds, String[] criteriaIds
+  ) throws InvalidFormulation {
     Formulatable formulatable = null;
 
     if ("breakdown".equals (formulationType)) {

@@ -1,14 +1,16 @@
 package formulation;
 
-import javax.servlet.http.HttpServletRequest;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import _action.CoursesRetrieverAction;
 import _action.RubricsLoaderAction;
+import _action.RubricRowsLoaderAction;
 
-import _error.ImproperRubricInfo;
+import _error.InvalidFormulation;
 
 import course.SimpleCourse;
 
@@ -23,7 +25,7 @@ public abstract class Formulation implements Formulatable {
 
   protected Map<SimpleCourse, List<Rubric>> coursesRubrics;
 
-  protected Map<Rubric, List<RubricRow>> rubricsCritera;
+  protected Map<Rubric, List<RubricRow>> rubricsCriteria;
 
   /**
    * The [Formulation] constructor...
@@ -31,16 +33,20 @@ public abstract class Formulation implements Formulatable {
   protected Formulation (
     HttpServletRequest request, String roleId,
     String[] courseIds, String[] rubricIds, String[] criteriaIds
-  ) throws Exception {
-    _performRetrieveCourses (request, roleId, courseIds);
-    _performRetrieveRubrics (rubricIds);
-    _performRetrieveCriteria (criteriaIds);
+  ) throws InvalidFormulation {
+    try {
+      _performRetrieveCourses (request, roleId, courseIds);
+      _performRetrieveRubrics (rubricIds);
+      _performRetrieveCriteria (criteriaIds);
+    } catch (Exception e) {
+      throw new InvalidFormulation (e.getMessage());
+    }
   }
 
   /**
    * The [formulate] abstract method...
    */
-  public abstract void formulate() throws ImproperRubricInfo;
+  public abstract void formulate() throws InvalidFormulation;
 
   /**
    * The [_performRetrieveCourses] method...
@@ -69,7 +75,17 @@ public abstract class Formulation implements Formulatable {
   /**
    * The [_performRetrieveCriteria] method...
    */
-  private void _performRetrieveCriteria (String[] criteriaIds) {
-    ;
+  private void _performRetrieveCriteria (String[] criteriaIds) throws Exception {
+    RubricRowsLoaderAction rubricsRowsLoader;
+    List<Rubric> courseRubrics = new ArrayList<>();
+
+    for (List<Rubric> rubrics : coursesRubrics.values()) {
+      courseRubrics.addAll (rubrics);
+    }
+
+    rubricsRowsLoader = new RubricRowsLoaderAction (courseRubrics);
+    rubricsRowsLoader.perform();
+
+    rubricsCriteria = rubricsRowsLoader.filterByIds (criteriaIds);
   }
 }
