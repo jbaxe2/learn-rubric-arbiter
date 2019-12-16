@@ -21,10 +21,12 @@
     } else if (null == selectedFormulation) {
       %><p>No formulation was selected for the course rubric criteria.</p><%
     } else {
-      Formulatable formulatable =
-        FormulationFactory.createFormulatable (selectedFormulation);
-
       try {
+        Formulatable formulatable = FormulationFactory.createFormulatable (
+          request, "rubric_evaluator", selectedCourses, selectedRubrics,
+          selectedCriteria, selectedFormulation
+        );
+
         if (null != formulatable) {
           formulatable.formulate();
         }
