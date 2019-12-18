@@ -1,6 +1,6 @@
 <%@ page import="
   java.util.List,
-  _action.CoursesRetrieverAction,
+  action.CoursesRetrieverAction,
   course.SimpleCourse" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

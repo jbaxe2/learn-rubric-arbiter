@@ -1,5 +1,6 @@
-<%@ page import="_factory.*" %>
-<%@ page import="formulation.*" %>
+<%@ page import="
+  _factory.FormulationFactory,
+  formulation.Formulatable" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bbNG" uri="/bbNG" %>

@@ -1,10 +1,10 @@
 <%@ page import="
-    java.util.HashMap,
-    java.util.List,
-    java.util.Map,
-    _action.CoursesRetrieverAction,
-    _action.RubricsLoaderAction,
-    rubric.Rubric" %>
+  java.util.HashMap,
+  java.util.List,
+  java.util.Map,
+  action.CoursesRetrieverAction,
+  action.RubricsLoaderAction,
+  rubric.Rubric" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bbNG" uri="/bbNG" %>

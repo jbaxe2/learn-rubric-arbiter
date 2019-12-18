@@ -1,5 +1,8 @@
 ## Learn Rubric Arbiter
 
+## 0.1.7
+- More work on formulation and action code.
+
 ## 0.1.6
 - Work on formulation code.
   - Created common interface, factories, and formulatables.

@@ -1,14 +1,15 @@
-package _action;
+package action;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import _persistence.PersistenceManager;
 import _persistence.rubric.RubricsLoader;
 
 import rubric.Rubric;
 import rubric.RubricRow;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * The [RubricRowsLoaderAction] class...
@@ -48,6 +49,17 @@ public class RubricRowsLoaderAction implements Actionable {
    */
   public Map<Rubric, List<RubricRow>> filterByIds (String[] rowIds) {
     Map<Rubric, List<RubricRow>> filteredRows = new HashMap<>();
+
+    for (String rowId : rowIds) {
+      for (Rubric courseRubric : rubrics) {
+        for (RubricRow rubricRow : rubricRows.get (courseRubric)) {
+          if (rowId.equals (rubricRow.getPrimaryKey())) {
+            filteredRows.putIfAbsent (courseRubric, new ArrayList<>());
+            filteredRows.get (courseRubric).add (rubricRow);
+          }
+        }
+      }
+    }
 
     return filteredRows;
   }

@@ -6,11 +6,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import _action.CoursesRetrieverAction;
-import _action.RubricsLoaderAction;
-import _action.RubricRowsLoaderAction;
-
 import _error.InvalidFormulation;
+
+import action.CoursesRetrieverAction;
+import action.RubricsLoaderAction;
+import action.RubricRowsLoaderAction;
 
 import course.SimpleCourse;
 

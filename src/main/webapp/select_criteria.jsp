@@ -1,8 +1,8 @@
 <%@ page import="
   java.util.HashMap,
-  _action.CoursesRetrieverAction,
-  _action.RubricsLoaderAction,
-  _action.RubricRowsLoaderAction,
+  action.CoursesRetrieverAction,
+  action.RubricsLoaderAction,
+  action.RubricRowsLoaderAction,
   rubric.Rubric,
   rubric.RubricRow" %>
 

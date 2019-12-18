@@ -1,5 +1,6 @@
-package _action;
+package action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,17 @@ public class RubricColumnsLoaderAction implements Actionable {
    */
   public Map<Rubric, List<RubricColumn>> filterByIds (String[] columnIds) {
     Map<Rubric, List<RubricColumn>> filteredColumns = new HashMap<>();
+
+    for (String columnId : columnIds) {
+      for (Rubric courseRubric : rubrics) {
+        for (RubricColumn rubricColumn : rubricColumns.get (courseRubric)) {
+          if (columnId.equals (rubricColumn.getPrimaryKey())) {
+            filteredColumns.putIfAbsent (courseRubric, new ArrayList<>());
+            filteredColumns.get (courseRubric).add (rubricColumn);
+          }
+        }
+      }
+    }
 
     return filteredColumns;
   }
