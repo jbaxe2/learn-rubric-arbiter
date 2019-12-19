@@ -27,6 +27,8 @@ public abstract class Formulation implements Formulatable {
 
   protected Map<Rubric, List<RubricRow>> rubricsCriteria;
 
+  protected List<Rubric> rubrics;
+
   /**
    * The [Formulation] constructor...
    */
@@ -70,22 +72,28 @@ public abstract class Formulation implements Formulatable {
     rubricsLoader.perform();
 
     coursesRubrics = rubricsLoader.filterByIds (rubricIds);
+
+    _flattenRubricsFromCourses();
   }
 
   /**
    * The [_performRetrieveCriteria] method...
    */
   private void _performRetrieveCriteria (String[] criteriaIds) throws Exception {
-    RubricRowsLoaderAction rubricsRowsLoader;
-    List<Rubric> courseRubrics = new ArrayList<>();
+    RubricRowsLoaderAction criteriaLoader = new RubricRowsLoaderAction (rubrics);
+    criteriaLoader.perform();
 
-    for (List<Rubric> rubrics : coursesRubrics.values()) {
-      courseRubrics.addAll (rubrics);
+    rubricsCriteria = criteriaLoader.filterByIds (criteriaIds);
+  }
+
+  /**
+   * The [_flattenRubricsFromCourses] method...
+   */
+  private void _flattenRubricsFromCourses() {
+    rubrics = new ArrayList<>();
+
+    for (List<Rubric> courseRubrics : coursesRubrics.values()) {
+      rubrics.addAll (courseRubrics);
     }
-
-    rubricsRowsLoader = new RubricRowsLoaderAction (courseRubrics);
-    rubricsRowsLoader.perform();
-
-    rubricsCriteria = rubricsRowsLoader.filterByIds (criteriaIds);
   }
 }

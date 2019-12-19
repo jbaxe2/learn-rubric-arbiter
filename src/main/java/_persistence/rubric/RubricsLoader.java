@@ -114,7 +114,7 @@ public class RubricsLoader {
   /**
    * The [loadRubricCellByColumnRowIds] method...
    */
-  public List<RubricCell> loadRubricCellByColumnRowIds (
+  public RubricCell loadRubricCellByColumnRowIds (
     String columnId, String rowId
   ) throws ImproperRubricInfo {
     RubricCellQueryExecutor rubricExecutor;
@@ -128,5 +128,24 @@ public class RubricsLoader {
     }
 
     return rubricExecutor.retrieveRubricCell();
+  }
+
+  /**
+   * The [loadRubricCellEvalsByRowCellIds] method...
+   */
+  public List<RubricCellEval> loadRubricCellEvalsByRowCellIds (
+    String rowId, String cellId
+  ) throws ImproperRubricInfo {
+    RubricCellEvalQueryExecutor rubricExecutor;
+
+    try {
+      rubricExecutor = new RubricCellEvalQueryExecutor (
+        queryBuilder.buildRetrieveRubricCellEvalsByRowAndCellIds (rowId, cellId)
+      );
+    } catch (Exception e) {
+      throw new ImproperRubricInfo (e.getMessage());
+    }
+
+    return rubricExecutor.retrieveRubricCellEvals();
   }
 }
