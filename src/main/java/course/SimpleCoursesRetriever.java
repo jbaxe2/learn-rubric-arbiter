@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import blackboard.persist.PersistenceException;
+
 import blackboard.persist.course.CourseDbLoader;
 import blackboard.persist.course.CourseMembershipDbLoader;
 

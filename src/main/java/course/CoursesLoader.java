@@ -4,6 +4,7 @@ import blackboard.data.course.Course;
 
 import blackboard.persist.Id;
 import blackboard.persist.PersistenceException;
+
 import blackboard.persist.course.CourseDbLoader;
 
 /**

@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import blackboard.data.course.CourseMembership;
+
 import blackboard.data.user.User;
 
 import blackboard.persist.Id;
 import blackboard.persist.PersistenceException;
+
 import blackboard.persist.course.CourseMembershipDbLoader;
 
 /**
