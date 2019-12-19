@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import _persistence.PersistenceManager;
-import _persistence.rubric.RubricsLoader;
-
 import rubric.Rubric;
 import rubric.RubricCell;
 import rubric.RubricColumn;

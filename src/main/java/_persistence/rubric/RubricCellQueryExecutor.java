@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import _error.ImproperRubricInfo;
+
 import _factory.RubricCellFactory;
 
 import rubric.RubricCell;

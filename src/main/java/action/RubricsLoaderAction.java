@@ -5,16 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import _persistence.PersistenceManager;
-import _persistence.rubric.RubricsLoader;
-
 import course.SimpleCourse;
+
 import rubric.Rubric;
 
 /**
  * The [RubricsLoaderAction] class...
  */
-public class RubricsLoaderAction implements Actionable {
+public class RubricsLoaderAction extends RubricAction {
   private Map<SimpleCourse, List<Rubric>> coursesRubrics;
 
   final private List<SimpleCourse> courses;
@@ -32,10 +30,7 @@ public class RubricsLoaderAction implements Actionable {
    * The [perform] method...
    */
   public void perform() throws Exception {
-    PersistenceManager manager = PersistenceManager.getInstance();
-    manager.establishConnection();
-
-    RubricsLoader loader = new RubricsLoader (manager.getConnection());
+    createLoader();
 
     coursesRubrics = loader.loadRubricsForCourses (courses);
   }

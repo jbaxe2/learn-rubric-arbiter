@@ -11,7 +11,7 @@ import rubric.RubricCellEval;
  * The [RubricCellEvalsLoaderAction] class...
  */
 public class RubricCellEvalsLoaderAction extends RubricAction {
-  private Map<RubricCell, List<RubricCellEval>> cellEvals;
+  private Map<RubricCell, List<RubricCellEval>> cellsEvals;
 
   private List<RubricCell> rubricCells;
 
@@ -21,25 +21,35 @@ public class RubricCellEvalsLoaderAction extends RubricAction {
   public RubricCellEvalsLoaderAction (List<RubricCell> rubricCells) {
     this.rubricCells = rubricCells;
 
-    cellEvals = new HashMap<>();
+    cellsEvals = new HashMap<>();
   }
 
   /**
    * The [perform] method...
    */
-  public void perform() throws Exception {}
+  public void perform() throws Exception {
+    createLoader();
+
+    for (RubricCell rubricCell : rubricCells) {
+      List<RubricCellEval> cellEvals = loader.loadRubricCellEvalsByRowCellIds (
+        rubricCell.getRowPk(), rubricCell.getPrimaryKey()
+      );
+
+      cellsEvals.get (rubricCell).addAll (cellEvals);
+    }
+  }
 
   /**
    * The [filterByIds] method...
    */
   public Map<RubricCell, List<RubricCellEval>> filterByIds (String[] cellEvalIds) {
-    return cellEvals;
+    return cellsEvals;
   }
 
   /**
    * The [getRubricCellEvals] method...
    */
   public Map<RubricCell, List<RubricCellEval>> getRubricCellEvals() {
-    return cellEvals;
+    return cellsEvals;
   }
 }

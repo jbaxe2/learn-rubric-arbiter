@@ -8,8 +8,10 @@ import blackboard.db.ConnectionNotAvailableException;
 
 import blackboard.persist.BbPersistenceManager;
 import blackboard.persist.PersistenceException;
+
 import blackboard.persist.course.CourseDbLoader;
 import blackboard.persist.course.CourseMembershipDbLoader;
+
 import blackboard.persist.user.UserDbLoader;
 
 import blackboard.platform.persistence.PersistenceServiceFactory;

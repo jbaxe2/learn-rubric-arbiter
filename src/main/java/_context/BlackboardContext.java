@@ -1,10 +1,10 @@
 package _context;
 
+import javax.servlet.http.HttpServletRequest;
+
 import blackboard.platform.context.Context;
 import blackboard.platform.context.ContextManager;
 import blackboard.platform.context.ContextManagerFactory;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * The [BlackboardContext] class...

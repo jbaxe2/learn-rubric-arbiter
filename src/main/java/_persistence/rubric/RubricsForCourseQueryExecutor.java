@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import _error.ImproperRubricInfo;
+
 import _factory.RubricFactory;
 
 import _persistence._query.PreparedQueryExecutor;

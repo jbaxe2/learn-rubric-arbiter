@@ -23,11 +23,11 @@ import rubric.RubricRow;
 public abstract class Formulation implements Formulatable {
   protected List<SimpleCourse> courses;
 
+  protected List<Rubric> rubrics;
+
   protected Map<SimpleCourse, List<Rubric>> coursesRubrics;
 
   protected Map<Rubric, List<RubricRow>> rubricsCriteria;
-
-  protected List<Rubric> rubrics;
 
   /**
    * The [Formulation] constructor...
