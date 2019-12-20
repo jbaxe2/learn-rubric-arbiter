@@ -48,7 +48,7 @@ public abstract class Formulation implements Formulatable {
   /**
    * The [formulate] abstract method...
    */
-  public abstract void formulate() throws InvalidFormulation;
+  public abstract Resultable formulate() throws InvalidFormulation;
 
   /**
    * The [_performRetrieveCourses] method...

@@ -29,15 +29,21 @@
         );
 
         if (null != formulatable) {
-          formulatable.formulate();
+          pageContext.setAttribute ("resultable", formulatable.formulate());
+
+          if ("breakdown".equals (selectedFormulation)) {
+            %><%@ include file="breakdown_formulation.jsp" %><%
+          } else {
+            %><p>The provided formulation is not currently supported.</p><%
+          }
+        } else {
+          %><p>The provided formulation is not valid.</p><%
         }
       } catch (Exception e) {
         %><bbNG:error exception="<%= e %>" /><br><%
       }
     }
   %>
-
-  <p>Here will be the results of formulating course rubric criteria.</p><br>
 
   <p>Start over: <a href="?select=courses">select courses</a>.</p>
 </bbNG:includedPage>

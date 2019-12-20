@@ -9,5 +9,5 @@ public interface Formulatable {
   /**
    * The [formulate] method...
    */
-  void formulate() throws InvalidFormulation;
+  Resultable formulate() throws InvalidFormulation;
 }

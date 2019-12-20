@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import _error.ImproperRubricInfo;
+
 import rubric.Rubric;
 import rubric.RubricCell;
 import rubric.RubricColumn;
@@ -47,6 +49,10 @@ public class RubricCellsLoaderAction extends RubricAction {
           RubricCell cell = loader.loadRubricCellByColumnRowIds (
             column.getPrimaryKey(), row.getPrimaryKey()
           );
+
+          if (null == cell) {
+            throw new ImproperRubricInfo ("Missing rubric cell information.");
+          }
 
           rubricCells.get (rubric).add (cell);
         }

@@ -1,5 +1,6 @@
 package action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,7 @@ public class RubricCellEvalsLoaderAction extends RubricAction {
         rubricCell.getRowPk(), rubricCell.getPrimaryKey()
       );
 
+      cellsEvals.putIfAbsent (rubricCell, new ArrayList<>());
       cellsEvals.get (rubricCell).addAll (cellEvals);
     }
   }
