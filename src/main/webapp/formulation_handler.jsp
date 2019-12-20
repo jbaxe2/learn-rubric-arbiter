@@ -29,7 +29,7 @@
         );
 
         if (null != formulatable) {
-          pageContext.setAttribute ("resultable", formulatable.formulate());
+          Resultable resultable = formulatable.formulate();
 
           if ("breakdown".equals (selectedFormulation)) {
             %><%@ include file="breakdown_formulation.jsp" %><%
@@ -45,5 +45,5 @@
     }
   %>
 
-  <p>Start over: <a href="?select=courses">select courses</a>.</p>
+  <bbNG:okButton url="?select=courses" />
 </bbNG:includedPage>

@@ -54,6 +54,27 @@ public class BreakdownFormulation extends Formulation {
   }
 
   /**
+   * The [getRubricsExpectations] method...
+   */
+  public Map<Rubric, List<RubricColumn>> getRubricsExpectations() {
+    return new HashMap<>(rubricsExpectations);
+  }
+
+  /**
+   * The [getRubricsCells] method...
+   */
+  public Map<Rubric, List<RubricCell>> getRubricsCells() {
+    return new HashMap<>(rubricsCells);
+  }
+
+  /**
+   * The [getRubricCellsEvals] method...
+   */
+  public Map<RubricCell, List<RubricCellEval>> getRubricCellsEvals() {
+    return new HashMap<>(rubricCellsEvals);
+  }
+
+  /**
    * The [_handlePerformances] method...
    */
   private void _handlePerformances() throws Exception {

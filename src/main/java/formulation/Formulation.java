@@ -1,6 +1,7 @@
 package formulation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +50,34 @@ public abstract class Formulation implements Formulatable {
    * The [formulate] abstract method...
    */
   public abstract Resultable formulate() throws InvalidFormulation;
+
+  /**
+   * The [getCourses] method...
+   */
+  public List<SimpleCourse> getCourses() {
+    return new ArrayList<>(courses);
+  }
+
+  /**
+   * The [getRubrics] method...
+   */
+  public List<Rubric> getRubrics() {
+    return new ArrayList<>(rubrics);
+  }
+
+  /**
+   * The [getCoursesRubrics] method...
+   */
+  public Map<SimpleCourse, List<Rubric>> getCoursesRubrics() {
+    return new HashMap<>(coursesRubrics);
+  }
+
+  /**
+   * The [getRubricsCriteria] method...
+   */
+  public Map<Rubric, List<RubricRow>> getRubricsCriteria() {
+    return new HashMap<>(rubricsCriteria);
+  }
 
   /**
    * The [_performRetrieveCourses] method...
