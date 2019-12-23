@@ -54,12 +54,12 @@
           </bbNG:step>
 
           <bbNG:stepSubmit
-              title="Select Rubrics for Courses"
+              title="Use the Above Selected Courses"
               instructions="Submit to select rubrics from the above
                   selected courses."
               cancelUrl="?select=courses">
 
-            <bbNG:stepSubmitButton label="Select Rubrics for Courses" />
+            <bbNG:stepSubmitButton label="Use the Above Selected Courses" />
           </bbNG:stepSubmit>
         </bbNG:dataCollection>
       </bbNG:form>

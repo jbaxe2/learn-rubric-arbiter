@@ -1,5 +1,9 @@
 ## Learn Rubric Arbiter
 
+## 0.1.9
+- Work on breakdown formulation view.
+- Some refactoring.
+
 ## 0.1.8
 - More work on developing formulation, particularly breakdown code.
 - Some refactoring.

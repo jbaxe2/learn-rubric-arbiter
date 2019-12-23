@@ -112,11 +112,11 @@
               </c:forEach>
 
               <bbNG:stepSubmit
-                  title="Select Formulation of Criteria"
+                  title="Use the Above Selected Criteria"
                   instructions="Submit to select the formulation you would like to
                       perform for the above selected rubric criteria."
                   cancelUrl="?select=courses">
-                <bbNG:stepSubmitButton label="Select Formulation of Criteria" />
+                <bbNG:stepSubmitButton label="Use the Above Selected Criteria" />
               </bbNG:stepSubmit>
             </bbNG:dataCollection>
 

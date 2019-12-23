@@ -22,6 +22,13 @@ public class CellEvalAverage {
   }
 
   /**
+   * The [getSize] method...
+   */
+  public int getSize() {
+    return cellEvals.size();
+  }
+
+  /**
    * The [getAverage] method...
    */
   public float getAverage() {
@@ -32,6 +39,12 @@ public class CellEvalAverage {
    * The [_determineAverage] method...
    */
   private void _determineAverage() {
+    if (0 == cellEvals.size()) {
+      average = 0;
+
+      return;
+    }
+
     float sum = 0;
 
     for (RubricCellEval cellEval : cellEvals) {

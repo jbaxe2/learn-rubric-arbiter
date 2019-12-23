@@ -3,6 +3,8 @@ package _persistence.rubric;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import java.util.List;
+
 import _error.ImproperRubricInfo;
 
 import _factory.RubricCellFactory;
@@ -25,7 +27,10 @@ class RubricCellQueryExecutor extends RubricQueryExecutor {
    */
   RubricCell retrieveRubricCell() throws ImproperRubricInfo {
     try {
-      return (new RubricCellFactory()).create (statement.executeQuery());
+      List<RubricCell> rubricCells =
+        new RubricCellFactory().createAll (statement.executeQuery());
+
+      return (rubricCells.get (0));
     } catch (SQLException e) {
       throw new ImproperRubricInfo (e.getMessage());
     }

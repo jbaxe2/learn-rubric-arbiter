@@ -16,10 +16,6 @@ public class RubricCellFactory implements ResultSettingFactory<RubricCell> {
    * The [create] method...
    */
   public RubricCell create (ResultSet rawResult) throws SQLException {
-    if (!rawResult.next()) {
-      return null;
-    }
-
     return new RubricCell (
       rawResult.getString ("pk1"),
       rawResult.getString ("rubric_row_pk1"),

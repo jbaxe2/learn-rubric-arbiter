@@ -82,11 +82,11 @@
               </c:forEach>
 
               <bbNG:stepSubmit
-                  title="Select Criteria for Rubrics"
+                  title="Use the Above Selected Rubrics"
                   instructions="Submit to select criteria from the above selected
                       rubrics.  Cancel to return to courses selection."
                   cancelUrl="?select=courses">
-                <bbNG:stepSubmitButton label="Select Criteria for Rubrics" />
+                <bbNG:stepSubmitButton label="Use the Above Selected Rubrics" />
               </bbNG:stepSubmit>
             </bbNG:dataCollection>
 
