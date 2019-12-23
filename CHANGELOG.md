@@ -1,5 +1,11 @@
 ## Learn Rubric Arbiter
 
+## 0.1.11
+- Resolved some issues.
+
+## 0.1.10
+- Changed permission settings.
+
 ## 0.1.9
 - Work on breakdown formulation view.
 - Some refactoring.

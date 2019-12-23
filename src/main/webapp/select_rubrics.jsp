@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bbNG" uri="/bbNG" %>
 
-<bbNG:includedPage authentication="Y" entitlement="course.control_panel.VIEW">
+<bbNG:includedPage authentication="Y">
 
 <%
   String[] selectedCourses = request.getParameterValues ("simple-courses");
@@ -62,31 +62,32 @@
                   </c:when>
 
                   <c:otherwise>
-                    <c:forEach var="rubrics" items="${courseRubrics.value}">
-                      <bbNG:step
-                          id="course-rubrics-${courseRubrics.key.primaryKey}"
-                          title="Rubrics for: ${courseRubrics.key.name}
-                              (${courseRubrics.key.batchUid})"
-                          enableExpandCollapse="true">
-                        <bbNG:dataElement>
+                    <bbNG:step
+                        id="course-rubrics-${courseRubrics.key.primaryKey}"
+                        title="Rubrics for: ${courseRubrics.key.name}
+                            (${courseRubrics.key.batchUid})"
+                        enableExpandCollapse="true">
+                      <bbNG:dataElement>
+                        <c:forEach var="rubrics" items="${courseRubrics.value}">
                           <bbNG:checkboxElement
-                              id="rubrics-for-${courseRubrics.key.primaryKey}"
+                              id="rubrics-for-${rubrics.primaryKey}"
                               value="${rubrics.primaryKey}"
                               name="course-rubrics"
-                              optionLabel="${rubrics.title}"/>
-                        </bbNG:dataElement>
-                      </bbNG:step>
-                    </c:forEach>
+                              optionLabel="${rubrics.title}"
+                              isVertical="true" />
+                        </c:forEach>
+                      </bbNG:dataElement>
+                    </bbNG:step>
                   </c:otherwise>
                 </c:choose>
               </c:forEach>
 
               <bbNG:stepSubmit
-                  title="Use the Above Selected Rubrics"
+                  title="Use the Selected Rubrics"
                   instructions="Submit to select criteria from the above selected
                       rubrics.  Cancel to return to courses selection."
                   cancelUrl="?select=courses">
-                <bbNG:stepSubmitButton label="Use the Above Selected Rubrics" />
+                <bbNG:stepSubmitButton label="Use the Selected Rubrics" />
               </bbNG:stepSubmit>
             </bbNG:dataCollection>
 

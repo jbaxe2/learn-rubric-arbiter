@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bbNG" uri="/bbNG" %>
 
-<bbNG:includedPage authentication="Y" entitlement="course.control_panel.VIEW">
+<bbNG:includedPage authentication="Y">
 
 <%
   String[] selectedCourses = request.getParameterValues ("simple-courses");

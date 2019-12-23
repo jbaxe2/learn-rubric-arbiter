@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bbNG" uri="/bbNG" %>
 
-<bbNG:includedPage authentication="Y" entitlement="course.control_panel.VIEW">
+<bbNG:includedPage authentication="Y">
 
 <%
   String[] selectedCourses = request.getParameterValues ("simple-courses");
@@ -101,7 +101,8 @@
                                   id="rubric-criteria-${criteria.primaryKey}"
                                   value="${criteria.primaryKey}"
                                   name="rubric-criteria"
-                                  optionLabel="${criteria.header}"/>
+                                  optionLabel="${criteria.header}"
+                                  isVertical="true"/>
                             </bbNG:dataElement>
                           </c:forEach>
                         </bbNG:step>
@@ -112,11 +113,11 @@
               </c:forEach>
 
               <bbNG:stepSubmit
-                  title="Use the Above Selected Criteria"
+                  title="Use the Selected Criteria"
                   instructions="Submit to select the formulation you would like to
                       perform for the above selected rubric criteria."
                   cancelUrl="?select=courses">
-                <bbNG:stepSubmitButton label="Use the Above Selected Criteria" />
+                <bbNG:stepSubmitButton label="Use the Selected Criteria" />
               </bbNG:stepSubmit>
             </bbNG:dataCollection>
 

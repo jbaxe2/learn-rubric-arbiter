@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bbNG" uri="/bbNG" %>
 
-<bbNG:includedPage authentication="Y" entitlement="course.control_panel.VIEW">
+<bbNG:includedPage authentication="Y">
 
 <%
   CoursesRetrieverAction coursesRetrieverAction =
@@ -19,7 +19,6 @@
   }
 
   List<SimpleCourse> courses = coursesRetrieverAction.getCourses();
-
   pageContext.setAttribute ("courses", courses);
 %>
 
@@ -41,7 +40,7 @@
               title="Courses Selection"
               enableExpandCollapse="true">
 
-            <c:forEach var="simpleCourse" items="<%= courses %>">
+            <c:forEach var="simpleCourse" items="${courses}">
               <bbNG:dataElement>
                 <bbNG:checkboxElement
                     id="simple-courses-${simpleCourse.primaryKey}"
@@ -54,12 +53,12 @@
           </bbNG:step>
 
           <bbNG:stepSubmit
-              title="Use the Above Selected Courses"
+              title="Use the Selected Courses"
               instructions="Submit to select rubrics from the above
                   selected courses."
               cancelUrl="?select=courses">
 
-            <bbNG:stepSubmitButton label="Use the Above Selected Courses" />
+            <bbNG:stepSubmitButton label="Use the Selected Courses" />
           </bbNG:stepSubmit>
         </bbNG:dataCollection>
       </bbNG:form>
