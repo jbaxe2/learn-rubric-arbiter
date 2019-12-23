@@ -36,9 +36,8 @@
                   <c:forEach
                       var="result"
                       items="${results.obtainResults()}">
-                    <c:if
-                        test="${result.key.rowPk == criteria.primaryKey &&
-                                result.key.columnPk == expectation.primaryKey}">
+                    <c:if test="${result.key.rowPk == criteria.primaryKey &&
+                                  result.key.columnPk == expectation.primaryKey}">
                       ${result.value.size} total, ${result.value.average} average
                     </c:if>
                   </c:forEach><br>
