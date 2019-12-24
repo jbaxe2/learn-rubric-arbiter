@@ -37,8 +37,7 @@
         <bbNG:dataCollection>
           <bbNG:step
               id="courses-selection-step"
-              title="Courses Selection"
-              enableExpandCollapse="true">
+              title="Courses Selection">
 
             <c:forEach var="simpleCourse" items="${courses}">
               <bbNG:dataElement>

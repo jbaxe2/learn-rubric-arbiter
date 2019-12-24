@@ -21,8 +21,8 @@ public class RubricCellEvalFactory
   public RubricCellEval create (ResultSet rawResult) throws SQLException {
     return new RubricCellEval (
       rawResult.getString ("pk1"),
+      rawResult.getString ("rubric_eval_pk1"),
       rawResult.getString ("rubric_row_pk1"),
-      rawResult.getString ("rubric_column_pk1"),
       rawResult.getString ("rubric_cell_pk1"),
       rawResult.getString ("feedback"),
       _determineFormatType (

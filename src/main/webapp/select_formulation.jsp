@@ -25,8 +25,7 @@
         <bbNG:dataCollection>
           <bbNG:step
               id="formulation-selector"
-              title="Formulation Selection"
-              enableExpandCollapse="true">
+              title="Formulation Selection">
             <bbNG:dataElement>
               <bbNG:radioElement
                   id="criteria-formulation-breakdown"

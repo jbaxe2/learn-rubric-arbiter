@@ -65,8 +65,7 @@
                     <bbNG:step
                         id="course-rubrics-${courseRubrics.key.primaryKey}"
                         title="Rubrics for: ${courseRubrics.key.name}
-                            (${courseRubrics.key.batchUid})"
-                        enableExpandCollapse="true">
+                            (${courseRubrics.key.batchUid})">
                       <bbNG:dataElement>
                         <c:forEach var="rubrics" items="${courseRubrics.value}">
                           <bbNG:checkboxElement

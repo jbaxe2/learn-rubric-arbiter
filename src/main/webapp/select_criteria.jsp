@@ -61,8 +61,7 @@
 
                 <bbNG:step
                     id="rubric-for-${courseWithRubrics.key.primaryKey}"
-                    title="${courseWithRubrics.key.batchUid}"
-                    enableExpandCollapse="true">
+                    title="${courseWithRubrics.key.batchUid}">
                   <%
                     List<Rubric> courseRubrics;
 
@@ -93,7 +92,6 @@
                         <bbNG:step
                             id="course-rubric-${rubricCriteria.key.primaryKey}"
                             title="Rubric ${rubricCriteria.key.title}"
-                            enableExpandCollapse="true"
                             subStep="true">
                           <c:forEach var="criteria" items="${rubricCriteria.value}">
                             <bbNG:dataElement>
