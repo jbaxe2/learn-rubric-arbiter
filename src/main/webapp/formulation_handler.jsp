@@ -6,6 +6,7 @@
 <%@ taglib prefix="bbNG" uri="/bbNG" %>
 
 <bbNG:includedPage authentication="Y">
+
   <%
     String[] selectedCourses = request.getParameterValues ("simple-courses");
     String[] selectedRubrics = request.getParameterValues ("course-rubrics");
@@ -40,10 +41,10 @@
           %><p>The provided formulation is not valid.</p><%
         }
       } catch (Exception e) {
-        %><bbNG:error exception="<%= e %>" /><br><%
+        %><bbNG:error exception="<%= e %>" /><br><br><%
       }
     }
   %>
 
-  <bbNG:okButton url="?select=courses" />
+  <br><bbNG:okButton url="?select=courses" />
 </bbNG:includedPage>

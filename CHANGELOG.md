@@ -1,5 +1,9 @@
 ## Learn Rubric Arbiter
 
+## 0.1.12
+- Resolved an issue with the cell eval factory not creating properly.
+- Minor refactoring.
+
 ## 0.1.11
 - Resolved some issues.
 

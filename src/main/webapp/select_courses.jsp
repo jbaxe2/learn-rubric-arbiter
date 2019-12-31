@@ -8,19 +8,19 @@
 
 <bbNG:includedPage authentication="Y">
 
-<%
-  CoursesRetrieverAction coursesRetrieverAction =
-    new CoursesRetrieverAction (request, "rubric_evaluator");
+  <%
+    CoursesRetrieverAction coursesRetrieverAction =
+      new CoursesRetrieverAction (request, "rubric_evaluator");
 
-  try {
-    coursesRetrieverAction.perform();
-  } catch (Exception e) {
-    %><bbNG:error exception="<%= e %>" /><br><%
-  }
+    try {
+      coursesRetrieverAction.perform();
+    } catch (Exception e) {
+      %><bbNG:error exception="<%= e %>" /><br><%
+    }
 
-  List<SimpleCourse> courses = coursesRetrieverAction.getCourses();
-  pageContext.setAttribute ("courses", courses);
-%>
+    List<SimpleCourse> courses = coursesRetrieverAction.getCourses();
+    pageContext.setAttribute ("courses", courses);
+  %>
 
   <c:choose>
     <c:when test="${courses.isEmpty()}">

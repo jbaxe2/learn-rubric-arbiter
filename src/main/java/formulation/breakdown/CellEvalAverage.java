@@ -51,6 +51,6 @@ public class CellEvalAverage {
       sum += cellEval.getSelectedPercent();
     }
 
-    average = sum / cellEvals.size();
+    average = sum / cellEvals.size() * 100;
   }
 }

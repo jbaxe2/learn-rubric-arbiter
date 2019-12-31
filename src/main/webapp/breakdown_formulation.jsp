@@ -8,13 +8,13 @@
 
 <bbNG:includedPage authentication="Y">
 
-<%
-  BreakdownFormulation breakForm = (BreakdownFormulation)formulatable;
-  pageContext.setAttribute ("breakForm", breakForm);
+  <%
+    BreakdownFormulation breakForm = (BreakdownFormulation)formulatable;
+    pageContext.setAttribute ("breakForm", breakForm);
 
-  CellEvalsBreakdown cellEvalsResults = (CellEvalsBreakdown)resultable;
-  pageContext.setAttribute ("results", cellEvalsResults);
-%>
+    CellEvalsBreakdown cellEvalsResults = (CellEvalsBreakdown)resultable;
+    pageContext.setAttribute ("results", cellEvalsResults);
+  %>
 
   <bbNG:tabbedPanels>
     <c:forEach var="course" items="${breakForm.courses}">

@@ -24,14 +24,10 @@ public class RubricCellEvalFactory
       rawResult.getString ("rubric_eval_pk1"),
       rawResult.getString ("rubric_row_pk1"),
       rawResult.getString ("rubric_cell_pk1"),
-      rawResult.getString ("feedback"),
-      _determineFormatType (
-        rawResult.getString ("feedback_format_type").charAt (0)
-      ),
+      _determineFeedback (rawResult.getString ("feedback")),
+      _determineFormatType (rawResult.getString ("feedback_format_type")),
       rawResult.getFloat ("selected_percent"),
-      _determineOverrideInd (
-        rawResult.getString ("override_type").charAt (0)
-      )
+      _determineOverrideInd (rawResult.getString ("override_ind"))
     );
   }
 
@@ -49,9 +45,26 @@ public class RubricCellEvalFactory
   }
 
   /**
+   * The [_determineFeedback] method...
+   */
+  private String _determineFeedback (String feedback) {
+    if (null == feedback) {
+      return "N/A";
+    }
+
+    return feedback;
+  }
+
+  /**
    * The [_determineFormatType] method...
    */
-  private FormatType _determineFormatType (char rawType) {
+  private FormatType _determineFormatType (String rawTypeStr) {
+    char rawType = 'P';
+
+    if ((null != rawTypeStr) && (0 < rawTypeStr.length())) {
+      rawType = rawTypeStr.charAt (0);
+    }
+
     switch (rawType) {
       case 'H': return FormatType.H;
       case 'S': return FormatType.S;
@@ -63,7 +76,13 @@ public class RubricCellEvalFactory
   /**
    * The [_determineOverrideInd] method...
    */
-  private boolean _determineOverrideInd (char rawInd) {
+  private boolean _determineOverrideInd (String rawIndStr) {
+    char rawInd = 'Y';
+
+    if ((null != rawIndStr) && (0 < rawIndStr.length())) {
+      rawInd = rawIndStr.charAt (0);
+    }
+
     return 'Y' == rawInd;
   }
 }
