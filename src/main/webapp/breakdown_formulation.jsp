@@ -23,12 +23,12 @@
             var="courseRubric"
             items="${breakForm.coursesRubrics.get (course)}">
           <div>
-            <h3>${courseRubric.title}</h3>
+            <h3 style="text-decoration: underline;">${courseRubric.title}</h3>
             <p>
               <c:forEach
                   var="criteria"
                   items="${breakForm.rubricsCriteria.get (courseRubric)}">
-                <strong>${criteria.header}:</strong><br>
+                <strong>Criteria <em>(${criteria.header})</em>:</strong><br>
                 <c:forEach
                     var="expectation"
                     items="${breakForm.rubricsExpectations.get (courseRubric)}">
@@ -38,7 +38,9 @@
                       items="${results.obtainResults()}">
                     <c:if test="${result.key.rowPk == criteria.primaryKey &&
                                   result.key.columnPk == expectation.primaryKey}">
-                      ${result.value.size} total, ${result.value.average} average
+                      ${result.value.size} scores,
+                      ${result.value.average / 100 * courseRubric.maxValue} in-range average
+                      <em>(${result.value.min} min - ${result.value.max} max)</em>
                     </c:if>
                   </c:forEach><br>
                 </c:forEach><br>

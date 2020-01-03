@@ -15,7 +15,7 @@ import rubric.RubricCellEval;
 public class CellEvalsBreakdown implements Resultable {
   final private Map<RubricCell, List<RubricCellEval>> cellsEvals;
 
-  private Map<RubricCell, CellEvalAverage> cellEvalAverage;
+  private Map<RubricCell, CellEvalAverage> cellsEvalAverages;
 
   /**
    * The [CellEvalBreakdown] constructor...
@@ -30,17 +30,20 @@ public class CellEvalsBreakdown implements Resultable {
    * The [obtainResults] method...
    */
   public Map<RubricCell, CellEvalAverage> obtainResults() {
-    return cellEvalAverage;
+    return cellsEvalAverages;
   }
 
   /**
    * The [_determineBreakdown] method...
    */
   private void _determineBreakdown() {
-    cellEvalAverage = new HashMap<>();
+    cellsEvalAverages = new HashMap<>();
 
     for (RubricCell cell : cellsEvals.keySet()) {
-      cellEvalAverage.put (cell, new CellEvalAverage (cellsEvals.get (cell)));
+      CellEvalAverage evalAverage =
+        new CellEvalAverage (cell, cellsEvals.get (cell));
+
+      cellsEvalAverages.put (cell, evalAverage);
     }
   }
 }

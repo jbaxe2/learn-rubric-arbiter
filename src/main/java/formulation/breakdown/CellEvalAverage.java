@@ -2,6 +2,7 @@ package formulation.breakdown;
 
 import java.util.List;
 
+import rubric.RubricCell;
 import rubric.RubricCellEval;
 
 /**
@@ -10,12 +11,19 @@ import rubric.RubricCellEval;
 public class CellEvalAverage {
   final private List<RubricCellEval> cellEvals;
 
+  private float min;
+
+  private float max;
+
   private float average;
 
   /**
    * The [CellEvalAverage] constructor...
    */
-  public CellEvalAverage (List<RubricCellEval> cellEvals) {
+  public CellEvalAverage (RubricCell cell, List<RubricCellEval> cellEvals) {
+    this.min = cell.getStartPointRange();
+    this.max = cell.getEndPointRange();
+
     this.cellEvals = cellEvals;
 
     _determineAverage();
@@ -29,10 +37,24 @@ public class CellEvalAverage {
   }
 
   /**
+   * The [getMin] method...
+   */
+  public float getMin() {
+    return min;
+  }
+
+  /**
+   * The [getMax] method...
+   */
+  public float getMax() {
+    return max;
+  }
+
+  /**
    * The [getAverage] method...
    */
   public float getAverage() {
-    return average;
+    return (float) (Math.round (average) / 1.00);
   }
 
   /**
