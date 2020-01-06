@@ -76,6 +76,24 @@ public class RubricsLoader {
   }
 
   /**
+   * The [loadRubricEvalsByRubricId] method...
+   */
+  public List<RubricEval> loadRubricEvalsByRubricId (String rubricId)
+      throws ImproperRubricInfo {
+    RubricEvalQueryExecutor rubricExecutor;
+
+    try {
+      rubricExecutor = new RubricEvalQueryExecutor (
+        queryBuilder.buildRetrieveRubricEvalsByRubricIdQuery (rubricId)
+      );
+    } catch (Exception e) {
+      throw new ImproperRubricInfo (e.getMessage());
+    }
+
+    return rubricExecutor.retrieveRubricEvals();
+  }
+
+  /**
    * The [loadRubricColumnsByRubricId] method...
    */
   public List<RubricColumn> loadRubricColumnsByRubricId (String rubricId)

@@ -18,6 +18,19 @@ class RubricQueryBuilder extends PreparedQueryBuilder {
   }
 
   /**
+   * The [buildRetrieveRubricByIdQuery] method...
+   */
+  PreparedStatement buildRetrieveRubricByIdQuery (String rubricId)
+      throws SQLException {
+    String query = "SELECT * FROM rubric WHERE pk1 = ?";
+
+    PreparedStatement statement = connection.prepareStatement (query);
+    statement.setString (1, rubricId);
+
+    return statement;
+  }
+
+  /**
    * The [buildRetrieveRubricsByCourseIdQuery] method...
    */
   PreparedStatement buildRetrieveRubricsByCourseIdQuery (String courseId)
@@ -31,11 +44,13 @@ class RubricQueryBuilder extends PreparedQueryBuilder {
   }
 
   /**
-   * The [buildRetrieveRubricByIdQuery] method...
+   * The [buildRetrieveRubricEvalsByRubricIdQuery] method...
    */
-  PreparedStatement buildRetrieveRubricByIdQuery (String rubricId)
+  PreparedStatement buildRetrieveRubricEvalsByRubricIdQuery (String rubricId)
       throws SQLException {
-    String query = "SELECT * FROM rubric WHERE pk1 = ?";
+    String query = "SELECT * FROM rubric_eval WHERE " +
+      "rubric_association_pk1 = rubric_association.pk1 AND " +
+      "rubric_association.rubric_pk1 = ?";
 
     PreparedStatement statement = connection.prepareStatement (query);
     statement.setString (1, rubricId);

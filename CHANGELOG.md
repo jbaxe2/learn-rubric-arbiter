@@ -1,5 +1,8 @@
 ## Learn Rubric Arbiter
 
+## 0.1.14
+- Work on rubric evaluations.
+
 ## 0.1.13
 - Work on rubric cell evaluation math.
 
