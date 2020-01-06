@@ -8,16 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import _error.InvalidFormulation;
 
-import action.RubricCellEvalsLoaderAction;
-import action.RubricCellsLoaderAction;
-import action.RubricColumnsLoaderAction;
-
 import formulation.breakdown.CellEvalsBreakdown;
 
-import rubric.Rubric;
-import rubric.RubricCell;
-import rubric.RubricCellEval;
-import rubric.RubricColumn;
+import action.*;
+import rubric.*;
 
 /**
  * The [BreakdownFormulation] class...
@@ -26,6 +20,8 @@ public class BreakdownFormulation extends Formulation {
   private Map<Rubric, List<RubricColumn>> rubricsExpectations;
 
   private Map<Rubric, List<RubricCell>> rubricsCells;
+
+  private Map<Rubric, List<RubricEval>> rubricsEvals;
 
   private Map<RubricCell, List<RubricCellEval>> rubricCellsEvals;
 
@@ -68,6 +64,13 @@ public class BreakdownFormulation extends Formulation {
   }
 
   /**
+   * The [getRubricsEvals] method...
+   */
+  public Map<Rubric, List<RubricEval>> getRubricsEvals() {
+    return new HashMap<>(rubricsEvals);
+  }
+
+  /**
    * The [getRubricCellsEvals] method...
    */
   public Map<RubricCell, List<RubricCellEval>> getRubricCellsEvals() {
@@ -80,6 +83,7 @@ public class BreakdownFormulation extends Formulation {
   private void _handlePerformances() throws Exception {
     _performRetrieveExpectations();
     _performRetrieveCells();
+    _performRetrieveEvals();
     _performRetrieveCellsEvals();
   }
 
@@ -110,6 +114,16 @@ public class BreakdownFormulation extends Formulation {
     cellsLoader.perform();
 
     rubricsCells = cellsLoader.getRubricCells();
+  }
+
+  /**
+   * The [_performRetrieveEvals] method...
+   */
+  private void _performRetrieveEvals() throws Exception {
+    RubricEvalsLoaderAction evalsLoader = new RubricEvalsLoaderAction (rubrics);
+    evalsLoader.perform();
+
+    rubricsEvals = evalsLoader.getRubricsEvals();
   }
 
   /**

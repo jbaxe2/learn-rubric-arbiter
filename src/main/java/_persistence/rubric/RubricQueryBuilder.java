@@ -48,8 +48,8 @@ class RubricQueryBuilder extends PreparedQueryBuilder {
    */
   PreparedStatement buildRetrieveRubricEvalsByRubricIdQuery (String rubricId)
       throws SQLException {
-    String query = "SELECT * FROM rubric_eval WHERE " +
-      "rubric_association_pk1 = rubric_association.pk1 AND " +
+    String query = "SELECT * FROM rubric_eval INNER JOIN rubric_association " +
+      "ON rubric_eval.rubric_association_pk1 = rubric_association.pk1 WHERE " +
       "rubric_association.rubric_pk1 = ?";
 
     PreparedStatement statement = connection.prepareStatement (query);

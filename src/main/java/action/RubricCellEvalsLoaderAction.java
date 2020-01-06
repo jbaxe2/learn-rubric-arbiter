@@ -14,7 +14,7 @@ import rubric.RubricCellEval;
 public class RubricCellEvalsLoaderAction extends RubricAction {
   private Map<RubricCell, List<RubricCellEval>> cellsEvals;
 
-  private List<RubricCell> rubricCells;
+  final private List<RubricCell> rubricCells;
 
   /**
    * The [RubricCellEvalsLoaderAction] constructor...
