@@ -1,7 +1,7 @@
 <%@ page import="
   formulation.BreakdownFormulation,
   formulation.Resultable,
-  formulation.breakdown.CellEvalsBreakdown" %>
+  formulation.breakdown.RubricsEvalsBreakdown" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="bbNG" uri="/bbNG" %>
@@ -12,7 +12,7 @@
     BreakdownFormulation breakForm = (BreakdownFormulation)formulatable;
     pageContext.setAttribute ("breakForm", breakForm);
 
-    CellEvalsBreakdown cellEvalsResults = (CellEvalsBreakdown)resultable;
+    RubricsEvalsBreakdown cellEvalsResults = (RubricsEvalsBreakdown)resultable;
     pageContext.setAttribute ("results", cellEvalsResults);
   %>
 

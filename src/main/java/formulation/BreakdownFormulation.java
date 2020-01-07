@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import _error.InvalidFormulation;
 
-import formulation.breakdown.CellEvalsBreakdown;
+import formulation.breakdown.RubricsEvalsBreakdown;
 
 import action.*;
 import rubric.*;
@@ -91,7 +91,7 @@ public class BreakdownFormulation extends Formulation {
    * The [_provideResults] method...
    */
   private Resultable _provideResults() {
-    return new CellEvalsBreakdown (rubricCellsEvals);
+    return new RubricsEvalsBreakdown (rubricsEvals, rubricCellsEvals);
   }
 
   /**

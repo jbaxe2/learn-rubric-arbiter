@@ -6,47 +6,40 @@ import rubric.RubricCell;
 import rubric.RubricCellEval;
 
 /**
- * The [CellEvalAverage] class...
+ * The [CellEvalsAverage] class...
  */
-public class CellEvalAverage {
+public class CellEvalsAverage {
   final private RubricCell cell;
 
   final private List<RubricCellEval> cellEvals;
-
-  private float min;
-
-  private float max;
 
   private int size;
 
   private float average;
 
   /**
-   * The [CellEvalAverage] constructor...
+   * The [CellEvalsAverage] constructor...
    */
-  public CellEvalAverage (RubricCell cell, List<RubricCellEval> cellEvals) {
+  public CellEvalsAverage (RubricCell cell, List<RubricCellEval> cellEvals) {
     this.cell = cell;
     this.cellEvals = cellEvals;
-
-    this.min = cell.getStartPointRange();
-    this.max = cell.getEndPointRange();
 
     _determineSize();
     _determineAverage();
   }
 
   /**
-   * The [getMin] method...
+   * The [getStartPoint] method...
    */
-  public float getMin() {
-    return min;
+  public float getStartPoint() {
+    return cell.getStartPointRange();
   }
 
   /**
-   * The [getMax] method...
+   * The [getEndPoint] method...
    */
-  public float getMax() {
-    return max;
+  public float getEndPoint() {
+    return cell.getEndPointRange();
   }
 
   /**
@@ -92,6 +85,6 @@ public class CellEvalAverage {
       sum += cellEval.getSelectedPercent();
     }
 
-    average = sum / cellEvals.size() * 100;
+    average = sum / size * 100;
   }
 }
