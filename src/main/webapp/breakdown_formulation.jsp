@@ -12,8 +12,8 @@
     BreakdownFormulation breakForm = (BreakdownFormulation)formulatable;
     pageContext.setAttribute ("breakForm", breakForm);
 
-    RubricsEvalsBreakdown cellEvalsResults = (RubricsEvalsBreakdown)resultable;
-    pageContext.setAttribute ("results", cellEvalsResults);
+    RubricsEvalsBreakdown evalsResults = (RubricsEvalsBreakdown)resultable;
+    pageContext.setAttribute ("results", evalsResults);
   %>
 
   <bbNG:tabbedPanels>
@@ -35,7 +35,7 @@
                   <strong>${expectation.header}:&nbsp;</strong>
                   <c:forEach
                       var="result"
-                      items="${results.obtainResults()}">
+                      items="${results.cellsEvalsAverages()}">
                     <c:if test="${result.key.rowPk == criteria.primaryKey &&
                                   result.key.columnPk == expectation.primaryKey}">
                       ${result.value.size} scores,

@@ -29,6 +29,13 @@ public class RubricEvalsAverage {
   }
 
   /**
+   * The [getRubric] method...
+   */
+  public Rubric getRubric() {
+    return rubric;
+  }
+
+  /**
    * The [getSize] method...
    */
   public int getSize() {

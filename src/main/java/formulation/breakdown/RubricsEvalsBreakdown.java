@@ -40,8 +40,8 @@ public class RubricsEvalsBreakdown implements Resultable {
   /**
    * The [obtainResults] method...
    */
-  public Map<RubricCell, CellEvalsAverage> obtainResults() {
-    return cellsEvalsAverages;
+  public Map<Rubric, RubricEvalsAverage> obtainResults() {
+    return getRubricsEvalsAverages();
   }
 
   /**
