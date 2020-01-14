@@ -35,7 +35,7 @@
                   <strong>${expectation.header}:&nbsp;</strong>
                   <c:forEach
                       var="result"
-                      items="${results.cellsEvalsAverages()}">
+                      items="${results.getCellsEvalsAverages()}">
                     <c:if test="${result.key.rowPk == criteria.primaryKey &&
                                   result.key.columnPk == expectation.primaryKey}">
                       ${result.value.size} scores,

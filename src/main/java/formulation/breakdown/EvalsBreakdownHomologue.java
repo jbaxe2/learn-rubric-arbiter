@@ -25,12 +25,14 @@ public class EvalsBreakdownHomologue {
   /**
    * The [EvalsBreakdownHomologue] constructor...
    */
-  EvalsBreakdownHomologue (
+  public EvalsBreakdownHomologue (
     Map<Rubric, List<RubricEval>> rubricsEvals,
     Map<RubricCell, List<RubricCellEval>> cellsEvals
   ) {
     this.rubricsEvals = rubricsEvals;
     this.rubricCellsEvals = cellsEvals;
+
+    _establishBreakdownHomologue();
   }
 
   /**
@@ -66,7 +68,7 @@ public class EvalsBreakdownHomologue {
    * The [_establishCellEvalsHomologue] method...
    */
   private void _establishCellEvalsHomologue() {
-    filteredRubricCellsEvals = new HashMap<>();
+    _filterRubricCellsEvals (_deduplicateCellsEvals());
   }
 
   /**
@@ -110,6 +112,46 @@ public class EvalsBreakdownHomologue {
         if (rubricPK.equals (rubric.getPrimaryKey())) {
           filteredRubricsEvals.putIfAbsent (rubric, new ArrayList<>());
           filteredRubricsEvals.get (rubric).add (studentsEvals.get (evalKey));
+        }
+      }
+    }
+  }
+
+  /**
+   * The [_deduplicateCellsEvals] method...
+   */
+  private Map<String, RubricCellEval> _deduplicateCellsEvals() {
+    Map<String, RubricCellEval> cellsEvals = new HashMap<>();
+
+    for (RubricCell cell : rubricCellsEvals.keySet()) {
+      List<RubricCellEval> cellEvals = rubricCellsEvals.get (cell);
+
+      for (RubricCellEval cellEval : cellEvals) {
+        String cellEvalKey = cell.getPrimaryKey() + ":" + cellEval.getRowPk() +
+          ":" + cellEval.getRubricEvalPk();
+
+        if (!cellsEvals.containsKey (cellEvalKey) || cellEval.isOverrideInd()) {
+          cellsEvals.put (cellEvalKey, cellEval);
+        }
+      }
+    }
+
+    return cellsEvals;
+  }
+
+  /**
+   * The [_filterRubricCellsEvals] method...
+   */
+  private void _filterRubricCellsEvals (Map<String, RubricCellEval> cellsEvals) {
+    filteredRubricCellsEvals = new HashMap<>();
+
+    for (String cellEvalKey : cellsEvals.keySet()) {
+      final String cellPk = cellEvalKey.split (":")[0];
+
+      for (RubricCell cell : rubricCellsEvals.keySet()) {
+        if (cellPk.equals (cell.getPrimaryKey())) {
+          filteredRubricCellsEvals.putIfAbsent (cell, new ArrayList<>());
+          filteredRubricCellsEvals.get (cell).add (cellsEvals.get (cellEvalKey));
         }
       }
     }
