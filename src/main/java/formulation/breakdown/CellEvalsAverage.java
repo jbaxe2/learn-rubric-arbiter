@@ -15,6 +15,10 @@ public class CellEvalsAverage {
 
   private int size;
 
+  private float min;
+
+  private float max;
+
   private float average;
 
   /**
@@ -23,6 +27,9 @@ public class CellEvalsAverage {
   public CellEvalsAverage (RubricCell cell, List<RubricCellEval> cellEvals) {
     this.cell = cell;
     this.cellEvals = cellEvals;
+
+    this.min = cell.getStartPointRange();
+    this.max = cell.getEndPointRange();
 
     _determineSize();
     _determineAverage();
@@ -50,10 +57,24 @@ public class CellEvalsAverage {
   }
 
   /**
+   * The [getMin] method...
+   */
+  public float getMin() {
+    return (float) (Math.round (min) / 1.00);
+  }
+
+  /**
+   * The [getMax] method...
+   */
+  public float getMax() {
+    return (float) (Math.round (max) / 1.00);
+  }
+
+  /**
    * The [getAverage] method...
    */
   public float getAverage() {
-    return (float) (Math.round (average) / 1.00);
+    return average;
   }
 
   /**
@@ -74,7 +95,7 @@ public class CellEvalsAverage {
    */
   private void _determineAverage() {
     if (0 == size) {
-      average = 0;
+      average = 0f;
 
       return;
     }
@@ -85,6 +106,6 @@ public class CellEvalsAverage {
       sum += cellEval.getSelectedPercent();
     }
 
-    average = sum / size * 100;
+    average = (float) (Math.round (sum / size * 100) / 1.00);
   }
 }

@@ -46,7 +46,7 @@ public class RubricEvalsAverage {
    * The [getAverage] method...
    */
   public float getAverage() {
-    return (float) (Math.round (average) / 1.00);
+    return average;
   }
 
   /**
@@ -61,7 +61,7 @@ public class RubricEvalsAverage {
    */
   private void _determineAverage() {
     if (0 == size) {
-      average = 0;
+      average = 0f;
 
       return;
     }
@@ -72,6 +72,6 @@ public class RubricEvalsAverage {
       sum += rubricEval.getCalculatedPercent();
     }
 
-    average = sum / size * 100;
+    average = (float) (Math.round (sum / size * 100) / 1.00);
   }
 }

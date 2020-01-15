@@ -81,13 +81,11 @@ public class EvalsBreakdownHomologue {
       List<RubricEval> evals = rubricsEvals.get (rubric);
 
       for (RubricEval eval : evals) {
-        String evalKey = rubric.getPrimaryKey() + ":" + eval.getAssociationPk() +
-          ":" + eval.getRespondentUserPk();
+        String evalKey =
+          rubric.getPrimaryKey() + ":" + eval.getRespondentUserPk();
 
         if (!studentsEvals.containsKey (evalKey)) {
-          if (eval.isCompletedInd()) {
-            studentsEvals.put (evalKey, eval);
-          }
+          studentsEvals.put (evalKey, eval);
         } else {
           if (0f < eval.getOverrideValue()) {
             studentsEvals.put (evalKey, eval);
@@ -127,11 +125,12 @@ public class EvalsBreakdownHomologue {
       List<RubricCellEval> cellEvals = rubricCellsEvals.get (cell);
 
       for (RubricCellEval cellEval : cellEvals) {
-        String cellEvalKey = cell.getPrimaryKey() + ":" + cellEval.getRowPk() +
-          ":" + cellEval.getRubricEvalPk();
+        if (_cellEvalIsPartOfFilteredEvals (cellEval)) {
+          String cellEvalKey = cell.getPrimaryKey() + ":" + cellEval.getRowPk();
 
-        if (!cellsEvals.containsKey (cellEvalKey) || cellEval.isOverrideInd()) {
-          cellsEvals.put (cellEvalKey, cellEval);
+          if (!cellsEvals.containsKey (cellEvalKey) || cellEval.isOverrideInd()) {
+            cellsEvals.put (cellEvalKey, cellEval);
+          }
         }
       }
     }
@@ -155,5 +154,20 @@ public class EvalsBreakdownHomologue {
         }
       }
     }
+  }
+
+  /**
+   * The [_cellEvalIsPartOfFilteredEvals] method...
+   */
+  private boolean _cellEvalIsPartOfFilteredEvals (RubricCellEval cellEval) {
+    for (Rubric rubric : filteredRubricsEvals.keySet()) {
+      for (RubricEval rubricEval : filteredRubricsEvals.get (rubric)) {
+        if (cellEval.getRubricEvalPk().equals (rubricEval.getPrimaryKey())) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 }

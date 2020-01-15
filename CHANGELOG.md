@@ -1,5 +1,8 @@
 ## Learn Rubric Arbiter
 
+## 0.1.16
+- Work to resolve some evaluation issues.
+
 ## 0.1.15
 - Created an evals breakdown homologue for which a deduplication process for
 evals breakdowns filters out extraneous rubric evals.

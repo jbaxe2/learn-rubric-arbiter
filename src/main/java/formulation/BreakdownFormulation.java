@@ -95,6 +95,7 @@ public class BreakdownFormulation extends Formulation {
       new EvalsBreakdownHomologue (rubricsEvals, rubricCellsEvals);
 
     return new RubricsEvalsBreakdown (
+      //rubricsEvals, rubricCellsEvals
       homologue.getHomologueRubricEvals(), homologue.getHomologueCellEvals()
     );
   }
