@@ -84,12 +84,9 @@ public class EvalsBreakdownHomologue {
         String evalKey = rubric.getPrimaryKey() + ":" + eval.getAssociationPk() +
           ":" + eval.getRespondentUserPk();
 
-        if (!studentsEvals.containsKey (evalKey)) {
+        if (!studentsEvals.containsKey (evalKey) ||
+            (0f < eval.getOverrideValue())) {
           studentsEvals.put (evalKey, eval);
-        } else {
-          if (0f < eval.getOverrideValue()) {
-            studentsEvals.put (evalKey, eval);
-          }
         }
       }
     }
