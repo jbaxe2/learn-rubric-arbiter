@@ -1,5 +1,9 @@
 ## Learn Rubric Arbiter
 
+## 0.1.17
+- Added the ability to pull instructor-level memberships in addition to the
+rubric evaluator role memberships.
+
 ## 0.1.16
 - Work to resolve some evaluation issues.
 

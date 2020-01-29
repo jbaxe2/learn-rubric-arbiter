@@ -7,7 +7,7 @@
     <description
         value="The Learn Rubric Arbiter is a simple tool allowing those with a
             particular role in courses to review rubric data in those courses." />
-    <version value="0.1.16" />
+    <version value="0.1.17" />
 
     <requires>
       <bbversion value="9.1" />

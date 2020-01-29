@@ -47,7 +47,7 @@ public class SimpleCoursesRetriever {
   ) throws PersistenceException {
     MembershipsLoader loader = new MembershipsLoader (membershipsLoader);
 
-    return loader.loadRubricEvaluatorMemberships (userId, roleId);
+    return loader.loadInstructorAndRubricEvaluatorMemberships (userId, roleId);
   }
 
   /**

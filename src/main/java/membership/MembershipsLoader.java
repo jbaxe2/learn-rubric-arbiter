@@ -26,6 +26,40 @@ public class MembershipsLoader {
   }
 
   /**
+   * The [loadInstructorAndRubricEvaluatorMemberships] method...
+   */
+  public List<SimpleMembership> loadInstructorAndRubricEvaluatorMemberships (
+    String userId, String evaluatorRoleId
+  ) throws PersistenceException {
+    List<SimpleMembership> memberships = new ArrayList<>();
+
+    memberships.addAll (loadInstructorMemberships (userId));
+    memberships.addAll (loadRubricEvaluatorMemberships (userId, evaluatorRoleId));
+
+    return memberships;
+  }
+
+  /**
+   * The [loadInstructorMemberships] method...
+   */
+  public List<SimpleMembership> loadInstructorMemberships (String userId)
+      throws PersistenceException {
+    List<SimpleMembership> memberships = new ArrayList<>();
+    Id userBbId = Id.toId (User.DATA_TYPE, userId);
+
+    List<CourseMembership> bbMemberships =
+      membershipsLoader.loadByUserId (userBbId);
+
+    for (CourseMembership bbMembership : bbMemberships) {
+      if (bbMembership.getRole().equals (CourseMembership.Role.INSTRUCTOR)) {
+        memberships.add (new SimpleMembership (bbMembership));
+      }
+    }
+
+    return memberships;
+  }
+
+  /**
    * The [loadRubricEvaluatorMemberships] method...
    */
   public List<SimpleMembership> loadRubricEvaluatorMemberships (
