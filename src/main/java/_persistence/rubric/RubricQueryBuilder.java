@@ -48,7 +48,7 @@ class RubricQueryBuilder extends PreparedQueryBuilder {
    */
   PreparedStatement buildRetrieveRubricEvalsByRubricIdQuery (String rubricId)
       throws SQLException {
-    String query = "SELECT * FROM rubric_eval INNER JOIN rubric_association " +
+    String query = "SELECT * FROM rubric_eval LEFT OUTER JOIN rubric_association " +
       "ON rubric_eval.rubric_association_pk1 = rubric_association.pk1 WHERE " +
       "rubric_association.rubric_pk1 = ?";
 
@@ -113,6 +113,22 @@ class RubricQueryBuilder extends PreparedQueryBuilder {
 
     PreparedStatement statement = connection.prepareStatement (query);
     statement.setString (1, rowId);
+    statement.setString (2, cellId);
+
+    return statement;
+  }
+
+  /**
+   * The [buildRetrieveRubricCellEvalsByEvalAndCellIds] method...
+   */
+  PreparedStatement buildRetrieveRubricCellEvalsByEvalAndCellIds (
+    String rubricEvalId, String cellId
+  ) throws SQLException {
+    String query = "SELECT * FROM rubric_cell_eval WHERE " +
+      "rubric_eval_pk1 = ? AND rubric_cell_pk1 = ?";
+
+    PreparedStatement statement = connection.prepareStatement (query);
+    statement.setString (1, rubricEvalId);
     statement.setString (2, cellId);
 
     return statement;

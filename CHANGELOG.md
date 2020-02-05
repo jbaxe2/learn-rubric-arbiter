@@ -1,5 +1,8 @@
 ## Learn Rubric Arbiter
 
+## 0.1.18
+- Start of reworking how rubric cell evals are extrapolated.
+
 ## 0.1.17
 - Added the ability to pull instructor-level memberships in addition to the
 rubric evaluator role memberships.

@@ -136,13 +136,11 @@ public class BreakdownFormulation extends Formulation {
    * The [_performRetrieveCellsEvals] method...
    */
   private void _performRetrieveCellsEvals() throws Exception {
-    RubricCellEvalsLoaderAction cellsEvalsLoader;
+    RubricCellEvalsLoaderAction cellsEvalsLoader =
+      new RubricCellEvalsLoaderAction (rubricsCells, rubricsEvals);
 
-    for (List<RubricCell> rubricCells : rubricsCells.values()) {
-      cellsEvalsLoader = new RubricCellEvalsLoaderAction (rubricCells);
-      cellsEvalsLoader.perform();
+    cellsEvalsLoader.perform();
 
-      rubricCellsEvals.putAll (cellsEvalsLoader.getRubricCellEvals());
-    }
+    rubricCellsEvals.putAll (cellsEvalsLoader.getRubricCellEvals());
   }
 }

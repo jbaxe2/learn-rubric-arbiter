@@ -62,6 +62,9 @@ public class EvalsBreakdownHomologue {
    */
   private void _establishRubricEvalsHomologue() {
     _filterRubricsEvals (_deduplicateStudentsEvals());
+
+    System.out.println ("Rubrics evals size: " + rubricsEvals.size());
+    System.out.println ("Filtered rubrics evals size: " + filteredRubricsEvals.size());
   }
 
   /**
@@ -69,6 +72,9 @@ public class EvalsBreakdownHomologue {
    */
   private void _establishCellEvalsHomologue() {
     _filterRubricCellsEvals (_deduplicateCellsEvals());
+
+    System.out.println ("Cells evals size: " + rubricCellsEvals.size());
+    System.out.println ("Filtered cells evals size: " + filteredRubricCellsEvals.size());
   }
 
   /**
@@ -123,7 +129,10 @@ public class EvalsBreakdownHomologue {
 
       for (RubricCellEval cellEval : cellEvals) {
         if (_cellEvalIsPartOfFilteredEvals (cellEval)) {
-          String cellEvalKey = cell.getPrimaryKey() + ":" + cellEval.getRowPk();
+          String cellEvalKey =
+            cell.getPrimaryKey() + ":" + cellEval.getRubricEvalPk();
+
+          System.out.println ("Cell eval is part of filtered evals: " + cellEvalKey);
 
           if (!cellsEvals.containsKey (cellEvalKey) || cellEval.isOverrideInd()) {
             cellsEvals.put (cellEvalKey, cellEval);
@@ -159,6 +168,9 @@ public class EvalsBreakdownHomologue {
   private boolean _cellEvalIsPartOfFilteredEvals (RubricCellEval cellEval) {
     for (Rubric rubric : filteredRubricsEvals.keySet()) {
       for (RubricEval rubricEval : filteredRubricsEvals.get (rubric)) {
+        System.out.println ("Rubric eval pk from cell eval: " + cellEval.getRubricEvalPk());
+        System.out.println ("Rubric eval pk: " + rubricEval.getPrimaryKey());
+
         if (cellEval.getRubricEvalPk().equals (rubricEval.getPrimaryKey())) {
           return true;
         }

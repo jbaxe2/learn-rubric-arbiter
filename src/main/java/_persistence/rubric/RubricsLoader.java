@@ -166,4 +166,23 @@ public class RubricsLoader {
 
     return rubricExecutor.retrieveRubricCellEvals();
   }
+
+  /**
+   * The [loadRubricCellEvalsByEvalCellIds] method...
+   */
+  public List<RubricCellEval> loadRubricCellEvalsByEvalCellIds (
+    String evalId, String cellId
+  ) throws ImproperRubricInfo {
+    RubricCellEvalQueryExecutor rubricExecutor;
+
+    try {
+      rubricExecutor = new RubricCellEvalQueryExecutor (
+        queryBuilder.buildRetrieveRubricCellEvalsByEvalAndCellIds (evalId, cellId)
+      );
+    } catch (Exception e) {
+      throw new ImproperRubricInfo (e.getMessage());
+    }
+
+    return rubricExecutor.retrieveRubricCellEvals();
+  }
 }
