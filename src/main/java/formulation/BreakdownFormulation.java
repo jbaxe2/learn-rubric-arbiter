@@ -8,9 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import _error.InvalidFormulation;
 
-import formulation.breakdown.*;
+import action.RubricCellEvalsLoaderAction;
+import action.RubricCellsLoaderAction;
+import action.RubricColumnsLoaderAction;
+import action.RubricEvalsLoaderAction;
 
-import action.*;
+import formulation.breakdown.RubricsEvalsBreakdown;
+
 import rubric.*;
 
 /**
@@ -91,12 +95,12 @@ public class BreakdownFormulation extends Formulation {
    * The [_provideResults] method...
    */
   private Resultable _provideResults() {
-    EvalsBreakdownHomologue homologue =
-      new EvalsBreakdownHomologue (rubricsEvals, rubricCellsEvals);
+    //EvalsBreakdownHomologue homologue =
+      //new EvalsBreakdownHomologue (rubricsEvals, rubricCellsEvals);
 
     return new RubricsEvalsBreakdown (
-      //rubricsEvals, rubricCellsEvals
-      homologue.getHomologueRubricEvals(), homologue.getHomologueCellEvals()
+      rubricsEvals, rubricCellsEvals
+      //homologue.getHomologueRubricEvals(), homologue.getHomologueCellEvals()
     );
   }
 
@@ -137,7 +141,7 @@ public class BreakdownFormulation extends Formulation {
    */
   private void _performRetrieveCellsEvals() throws Exception {
     RubricCellEvalsLoaderAction cellsEvalsLoader =
-      new RubricCellEvalsLoaderAction (rubricsCells, rubricsEvals);
+      new RubricCellEvalsLoaderAction (rubricsCells.values());
 
     cellsEvalsLoader.perform();
 
